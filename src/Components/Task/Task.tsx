@@ -1,7 +1,7 @@
 import React from 'react';
-import {TaskType} from "./TodoList";
+import {TaskType} from "../TodoList/TodoList";
 
-type TaskPropsType =   TaskType
+type TaskPropsType = TaskType
 
 
 const Task = (props: TaskPropsType) => {
@@ -9,7 +9,8 @@ const Task = (props: TaskPropsType) => {
         <li>
             <input type="checkbox"
                    checked={props.isDone}/>
-            <span>{props.title}</span></li>
+            <span>{props.title}</span>
+        </li>
     );
 };
 
