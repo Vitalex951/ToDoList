@@ -1,6 +1,7 @@
 import React from 'react';
 import Task from "../Task/Task";
 import {TaskType} from "../TodoList/TodoList";
+import ControlButtons from "../ControlButtons/ControlButtons";
 
 type TaskListPropsType = {
     tasks: Array<TaskType>
@@ -8,10 +9,14 @@ type TaskListPropsType = {
 
 const TaskList = (props: TaskListPropsType) => {
     return (
+        <>
             <ul>
                 <Task {...props.tasks[0]}/>
 
                 <Task {...props.tasks[1]}/>
+
+
+                <Task id={} title={} isDone={} />
 
                 <Task
                     id={props.tasks[2].id}
@@ -20,6 +25,8 @@ const TaskList = (props: TaskListPropsType) => {
 
                     <>;
             </ul>
+            <ControlButtons/>
+        </>
     );
 };
 

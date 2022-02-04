@@ -7,7 +7,6 @@ function App() {
         {id: 1, title: 'HTML', isDone: true},
         {id: 2, title: 'CSS', isDone: true},
         {id: 3, title: 'JS/TS', isDone: true},
-
     ]
 
     const tasks_2: Array<TaskType> = [
@@ -23,6 +22,7 @@ function App() {
     ]
 
     return (
+        <>
         <div className="App">
             <>
             <TodoList title={'What to learn'} tasks={tasks_1}/>
@@ -30,8 +30,8 @@ function App() {
             <TodoList title={'What is buy'} tasks={tasks_3}/>
             </>
         </div>
+            </>
     );
 }
-
 
 export default App;
