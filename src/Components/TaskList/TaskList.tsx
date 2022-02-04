@@ -18,6 +18,7 @@ const TaskList = (props: TaskListPropsType) => {
                     title={props.tasks[2].title}
                     isDone={props.tasks[2].isDone}/>
 
+                    <>;
             </ul>
     );
 };
