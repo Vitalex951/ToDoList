@@ -19,10 +19,15 @@ function App() {
     const [tasks, setTasks] = useState<Array<TaskType>>([
         {id: 1, title: 'HTML', isDone: true},
         {id: 2, title: 'CSS', isDone: true},
+<<<<<<< HEAD
         {id: 3, title: 'JS/TS', isDone: false}
     ])
 
     const [filter, setFilter] = useState<FilterValueType>('all')
+=======
+        {id: 3, title: 'JS/TS', isDone: true},
+    ]
+>>>>>>> origin/main
 
     const removeTask = (taskID: number) => {
         const filteredTasks = tasks.filter(task => task.id !== taskID)
@@ -46,6 +51,7 @@ function App() {
     const filteredTasksForRender = getFilteredTasksForRender()
 
     return (
+        <>
         <div className="App">
             <TodoList
                 title={'What to learn'}
@@ -56,8 +62,8 @@ function App() {
             {/*<TodoList title={'What is ready'} tasks={tasks_2}/>*/}
             {/*<TodoList title={'What is buy'} tasks={tasks_3}/>*/}
         </div>
+            </>
     );
 }
-
 
 export default App;
