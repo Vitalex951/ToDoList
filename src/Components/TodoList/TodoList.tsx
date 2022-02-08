@@ -1,16 +1,14 @@
 import React from 'react';
 import ToDoListHeader from "../TodoListHeader/ToDoListHeader";
 import TaskList from "../TaskList/TaskList";
-<<<<<<< HEAD
 import AddTaskForm from "../AddTaskForm/AddTaskForm";
-import {FilterValueType} from "../../App";
-=======
->>>>>>> origin/main
+import {FilterValuesType} from "../../App";
 
 type TodoListPropsType = {
     title: string
     tasks: Array<TaskType>
-    removeTask: (taskID: number) => void
+    removeTask: (id: number) => void
+    changeFilter: (value: FilterValuesType) => void
 }
 
 
@@ -18,7 +16,6 @@ export type TaskType = {
     id: number
     title: string
     isDone: boolean
-    changeFilter: (filter: FilterValueType) => void
 }
 
 const TodoList = (props: TodoListPropsType) => {
@@ -26,12 +23,12 @@ const TodoList = (props: TodoListPropsType) => {
     return (
         <div>
             <ToDoListHeader title={props.title}/>
-<<<<<<< HEAD
             <AddTaskForm/>
-            <TaskList tasks={props.tasks} removeTask={props.removeTask} changeFilter={props.}/>
-=======
-            <TaskList tasks={props.tasks}/>
->>>>>>> origin/main
+            <TaskList
+                tasks={props.tasks}
+                removeTask={props.removeTask}
+                changeFilter={props.changeFilter}
+               />
         </div>
     );
 };

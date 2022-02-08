@@ -9,7 +9,6 @@ const ToDoListHeader = (props: ToDoListHeaderPropsType) => {
     return (
         <>
             <h3>{props.title}</h3>
-            <AddTaskForm/>
         </>
     );
 };

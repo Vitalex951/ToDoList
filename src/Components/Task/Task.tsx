@@ -1,8 +1,9 @@
 import React from 'react';
 import {TaskType} from "../TodoList/TodoList";
 
+
 type TaskPropsType = TaskType & {
-    removeTask: (taskID: number) => void
+    removeTask: (id: number) => void
 }
 
 
