@@ -1,30 +1,59 @@
 import React, {useState} from 'react';
 import './App.css';
 import TodoList, {TaskType} from "./Components/TodoList/TodoList"
+import {v1} from "uuid";
 
-//18-39
-//18-30
-//19-25
-//19-33 разобраться
-//19-57 яяя
-//20-51 xuk
-//21-00 xuk_2
 
-export type FilterValuesType = 'all' | 'active' | 'completed' 
+export type FilterValuesType = 'all' | 'active' | 'completed'
 
 function App() {
-
-
+    let [error, setError] = useState<string | ''>('')
     //deleted Tasks
-    let [tasks, setTask] = useState<Array<TaskType>>([
-        {id: 1, title: 'HTML', isDone: true},
-        {id: 2, title: 'CSS', isDone: true},
-        {id: 3, title: 'JS/TS', isDone: false},
+    const [tasks, setTask] = useState<Array<TaskType>>([
+        {id: v1(), title: 'HTML', isDone: true},
+        {id: v1(), title: 'CSS', isDone: true},
+        {id: v1(), title: 'JS/TS', isDone: false},
+        {id: v1(), title: 'React/js', isDone: false},
+        {id: v1(), title: 'React API', isDone: false},
     ]);
-
-    function removeTask(id: number) {
+    function removeTask(id: string) {
         let filterTasks = tasks.filter(t => t.id != id)
         setTask(filterTasks)
+    }
+
+    function changeStatus(taskId: string, isDone: boolean) {
+        let task = tasks.find(t => t.id === taskId)
+        if (task) {
+            task.isDone = isDone
+        }
+        setTask([...tasks])
+    }
+
+    const addTask = (title: string) => {
+        // const newTask: TaskType = {
+        //     id: v1(), title: title, isDone: false
+        // }
+        // const updatedTasks = [newTask, ...tasks]
+        // setTask(updatedTasks)
+
+        //     setTask([{
+        //         id: v1(),
+        //         title: title,
+        //         isDone: false
+        //     },
+        //         ...tasks])
+        // }
+        if (title.trim() === '') {
+            setError('Error')
+        } else {
+            setTask([{
+                id: v1(),
+                title,   //сокращенная запись
+                isDone: false
+            },
+                ...tasks])
+            setError('')
+        }
     }
 
 //filter
@@ -37,14 +66,12 @@ function App() {
     if (filter === 'active') {
         tasksForToDoList = tasks.filter(f => !f.isDone)
     }
+
     function changeFilter(value: FilterValuesType) {
         setFilter(value)
     }
 
 
-    console.log(tasks)
-    console.log(tasksForToDoList)
-    
     return (
         <>
             <div className="App">
@@ -53,7 +80,11 @@ function App() {
                     tasks={tasksForToDoList}
                     removeTask={removeTask}
                     changeFilter={changeFilter}
-
+                    addTask={addTask}
+                    changeStatus={changeStatus}
+                    error = {error}
+                    setError={setError}
+                    filter = {filter}
                 />
             </div>
         </>
