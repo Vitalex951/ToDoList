@@ -1,5 +1,6 @@
 import React, {ChangeEvent, useState, KeyboardEvent} from 'react';
 import {Button} from "../Button/Button";
+import {Input} from "../Input/Input";
 
 type AddTaskFormPropsType = {
     addTask: (title: string) => void
@@ -30,11 +31,12 @@ const AddTaskForm = (props: AddTaskFormPropsType) => {
     let classError = (error ? 'input-add error' : 'input-add')
     return (
         <div>
-            <input className={classError}
-                   value={title}
-                   onChange={onChangeSetTitle}
-                   onKeyPress={onKeyPressTitle}/>
-            <Button classname={'add-task-button'}
+            <Input className={classError}
+                   title={title}
+                   setError={setError}
+                   setTitle={setTitle}
+                   onClickAddTask={onClickAddTask}/>
+            <Button classname={'button9'}
                     name={'add'}
                     callback={onClickAddTask}/>
             {error && <div className='error-message'> Title is required</div>}

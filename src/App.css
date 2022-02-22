@@ -19,6 +19,33 @@ body {
     margin: auto;
 }
 
+.header {
+    font-style: italic;
+    font-size: 25px;
+    text-align: center;
+}
+
+H3 {
+    text-shadow: -1px -1px #FFF,
+    -2px -2px #FFF,
+    -1px 1px #FFF,
+    -2px 2px #FFF,
+    1px 1px #FFF,
+    2px 2px #FFF,
+    1px -1px #FFF,
+    2px -2px #FFF,
+    -3px -3px 2px #BBB,
+    -3px 3px 2px #BBB,
+    3px 3px 2px #BBB,
+    3px -3px 2px #BBB;
+    color: rgba(255, 37, 0, 0.95);
+    transition: all 1s;
+}
+
+H3:hover {
+    color: yellowgreen;
+}
+
 .error {
     border: 1px solid red;
 }
@@ -27,9 +54,11 @@ body {
     color: red;
 }
 
-.active-filter {
-    background-color: rgba(27, 255, 235, 0.95);
-}
+/*.active-filter {*/
+/*    background-color: rgba(27, 255, 235, 0.95);*/
+/*}*/
+
+
 
 .is-done {
     opacity: 0.5;
@@ -40,14 +69,70 @@ body {
     border-radius: 5px;
 }
 
-.add-task-button {
-    width: 38px;
-    height: 25px;
-    border-radius: 40%;
-    background-color: rgba(255, 216, 19, 0.9);
+/*.add-task-button {*/
+/*    width: 38px;*/
+/*    height: 25px;*/
+/*    border-radius: 40%;*/
+/*    background-color: rgba(255, 216, 19, 0.9);*/
+/*}*/
+
+.button9 {
+    position: relative;
+    display: inline-block;
+    color: #777674;
+    font-weight: bold;
+    text-decoration: none;
+    text-shadow: rgba(255, 255, 255, .5) 1px 1px, rgba(100, 100, 100, .3) 3px 7px 3px;
+    user-select: none;
+    outline: none;
+    border-radius: 3px / 100%;
+    background-image: linear-gradient(45deg, rgba(255, 255, 255, .0) 30%, rgba(255, 255, 255, .8), rgba(255, 255, 255, .0) 70%),
+    linear-gradient(to right, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 90%, rgba(255, 255, 255, .3)),
+    linear-gradient(to right, rgba(125, 125, 125, 1), rgba(255, 255, 255, .9) 45%, rgba(125, 125, 125, .5)),
+    linear-gradient(to right, rgba(125, 125, 125, 1), rgba(255, 255, 255, .9) 45%, rgba(125, 125, 125, .5)),
+    linear-gradient(to right, rgba(223, 190, 170, 1), rgba(255, 255, 255, .9) 45%, rgba(223, 190, 170, .5)),
+    linear-gradient(to right, rgba(223, 190, 170, 1), rgba(255, 255, 255, .9) 45%, rgba(223, 190, 170, .5));
+    background-repeat: no-repeat;
+    background-size: 200% 100%, auto, 100% 2px, 100% 2px, 100% 1px, 100% 1px;
+    background-position: 200% 0, 0 0, 0 0, 0 100%, 0 4px, 0 calc(100% - 4px);
+    box-shadow: rgba(0, 0, 0, .5) 3px 10px 10px -10px;
+}
+
+.button9:hover {
+    transition: .5s linear;
+    background-position: -200% 0, 0 0, 0 0, 0 100%, 0 4px, 0 calc(100% - 4px);
+}
+
+.button9:active {
+    top: 1px;
 }
 
 .input-add {
 
     border-radius: 10px;
+}
+
+.active-filter {
+    position: relative;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    text-shadow: -1px -1px #000;
+    user-select: none;
+    /*padding: .8em 2em;*/
+    outline: none;
+    background-color: deepskyblue;
+    background-image: linear-gradient(45deg, rgba(255,255,255,.0) 30%, rgba(255,255,255,.8), rgba(255,255,255,.0) 70%), radial-gradient(190% 100% at 50% 0%, rgba(255,255,255,.7) 0%, rgba(255,255,255,.5) 50%, rgba(0,0,0,0) 50%);
+    background-repeat: no-repeat;
+    background-size: 200% 100%, auto;
+    background-position: 200% 0, 0 0;
+    box-shadow: rgba(0,0,0,.3) 0 2px 5px;
+}
+.active-filter:active {
+    top: 1px;
+    box-shadow: none;
+}
+.active-filter:hover {
+    transition: .5s linear;
+    background-position: -200% 0, 0 0;
 }

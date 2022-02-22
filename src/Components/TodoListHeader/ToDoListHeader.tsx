@@ -6,9 +6,7 @@ type ToDoListHeaderPropsType = {
 
 const ToDoListHeader = (props: ToDoListHeaderPropsType) => {
     return (
-        <>
-            <h3>{props.title}</h3>
-        </>
+            <h3 className='header'>{props.title}</h3>
     );
 };
 
