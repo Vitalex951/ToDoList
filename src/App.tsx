@@ -7,7 +7,7 @@ import {v1} from "uuid";
 export type FilterValuesType = 'all' | 'active' | 'completed'
 
 function App() {
-    let [error, setError] = useState<string | ''>('')
+
     //deleted Tasks
     const [tasks, setTask] = useState<Array<TaskType>>([
         {id: v1(), title: 'HTML', isDone: true},
@@ -16,18 +16,20 @@ function App() {
         {id: v1(), title: 'React/js', isDone: false},
         {id: v1(), title: 'React API', isDone: false},
     ]);
+
     function removeTask(id: string) {
         let filterTasks = tasks.filter(t => t.id != id)
         setTask(filterTasks)
     }
 
-    function changeStatus(taskId: string, isDone: boolean) {
-        let task = tasks.find(t => t.id === taskId)
-        if (task) {
-            task.isDone = isDone
-        }
-        setTask([...tasks])
-    }
+    // function changeStatus(taskId: string, isDone: boolean) {
+    //     let task = tasks.find(t => t.id === taskId)
+    //     if (task) {
+    //         task.isDone = isDone
+    //     }
+    //     setTask([...tasks])
+    // }
+    const changeStatus = (taskId: string, isDone: boolean) => setTask(tasks.map (t => t.id === taskId? {...t, isDone: isDone}: t))
 
     const addTask = (title: string) => {
         // const newTask: TaskType = {
@@ -43,17 +45,12 @@ function App() {
         //     },
         //         ...tasks])
         // }
-        if (title.trim() === '') {
-            setError('Error')
-        } else {
-            setTask([{
-                id: v1(),
-                title,   //сокращенная запись
-                isDone: false
-            },
-                ...tasks])
-            setError('')
-        }
+        setTask([{
+            id: v1(),
+            title,   //сокращенная запись
+            isDone: false
+        },
+            ...tasks])
     }
 
 //filter
@@ -82,10 +79,7 @@ function App() {
                     changeFilter={changeFilter}
                     addTask={addTask}
                     changeStatus={changeStatus}
-                    error = {error}
-                    setError={setError}
-                    filter = {filter}
-                />
+                    filter={filter}/>
             </div>
         </>
     );

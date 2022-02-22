@@ -15,23 +15,41 @@ type TaskListPropsType = {
 
 const TaskList = (props: TaskListPropsType) => {
 
-    const tasksComponentsList = props.tasks.map(task => {
-            return <Task key={task.id}  {...task} changeStatus ={props.changeStatus} removeTask={props.removeTask}/>
-        }
-    ) /* <Task key={task.id} {...task} /!*removeTask={props.removeTask}*!//>*/
-    return (
-        <>
-            <ul>
-                {tasksComponentsList}
-            </ul>
-            <ControlButtons
-                changeFilter={props.changeFilter}
-                filter = {props.filter}
-            />
-        </>
-    );
+        const tasksComponentsList = props.tasks.map(task => {
+                return <Task key={task.id}
+                             {...task}
+                             changeStatus={props.changeStatus}
+                             removeTask={props.removeTask}/>
+            }
+        )
 
-};
+        if (props.tasks.length) {
+            return (
+                <>
+                    <ul>
+                        {tasksComponentsList}
+                    </ul>
+                    <ControlButtons
+                        changeFilter={props.changeFilter}
+                        filter={props.filter}
+                    />
+                </>
+            )
+        } else {
+            return (
+                <>
+                    <span className='error-message'>Add please task or change the filter</span>
+                    <ControlButtons
+                        changeFilter={props.changeFilter}
+                        filter={props.filter}/>
+
+                </>
+
+            )
+        }
+
+    }
+;
 
 export default TaskList;
 

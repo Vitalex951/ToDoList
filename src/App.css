@@ -1,20 +1,53 @@
+body {
+    background-image: url("img/paper-flower-background-g980ae255b_1920.jpg");
+    background-size: 100%;
+}
+
 .App {
-  padding: 30px;
-  display: flex;
+    margin: 50px auto auto auto;
+    padding: 10px;
+    display: flex;
+    border-radius: 20px;
+    background-color: rgba(189, 240, 240, 0.3);
+    border: 2px solid black;
+    max-width: 300px;
+    min-height: 300px;
+
 }
 
 .App > div {
-  margin-right: 50px;
+    margin: auto;
 }
+
 .error {
-  border: 1px solid red;
+    border: 1px solid red;
 }
+
 .error-message {
-  color: red;
+    color: red;
 }
+
 .active-filter {
-  background-color: aquamarine;
+    background-color: rgba(27, 255, 235, 0.95);
 }
+
 .is-done {
-  opacity: 0.5;
+    opacity: 0.5;
+    color: rgba(0, 10, 99, 0.95)
+}
+
+.button {
+    border-radius: 5px;
+}
+
+.add-task-button {
+    width: 38px;
+    height: 25px;
+    border-radius: 40%;
+    background-color: rgba(255, 216, 19, 0.9);
+}
+
+.input-add {
+
+    border-radius: 10px;
 }

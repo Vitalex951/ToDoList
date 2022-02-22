@@ -1,39 +1,43 @@
 import React, {ChangeEvent, useState, KeyboardEvent} from 'react';
+import {Button} from "../Button/Button";
 
 type AddTaskFormPropsType = {
     addTask: (title: string) => void
-    error: string | ''
-    setError: (error: string) => void
 }
 
 const AddTaskForm = (props: AddTaskFormPropsType) => {
 
     const [title, setTitle] = useState<string>('')
-
+    const [error, setError] = useState<string | ''>('')
     const onClickAddTask = () => {
-        props.addTask(title)
-        setTitle('')
-
+        if (title.trim()) {
+            props.addTask(title.trim())
+            setTitle('')
+            setError('')
+        } else {
+            setError('Error')
+        }
     }
     const onChangeSetTitle = (e: ChangeEvent<HTMLInputElement>) => {
         setTitle(e.currentTarget.value)
-        props.setError('')
+        setError('')
     }
     const onKeyPressTitle = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
             onClickAddTask()
         }
     }
-    let classError = (props.error ? 'error' : '')
+    let classError = (error ? 'input-add error' : 'input-add')
     return (
         <div>
             <input className={classError}
                    value={title}
                    onChange={onChangeSetTitle}
-                   onKeyPress={onKeyPressTitle}
-            />
-            <button onClick={onClickAddTask}>+</button>
-            {props.error && <div className='error-message'> Title is required</div>}
+                   onKeyPress={onKeyPressTitle}/>
+            <Button classname={'add-task-button'}
+                    name={'add'}
+                    callback={onClickAddTask}/>
+            {error && <div className='error-message'> Title is required</div>}
         </div>
     );
 };

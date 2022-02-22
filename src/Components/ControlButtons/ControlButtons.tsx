@@ -1,6 +1,7 @@
 import React from 'react';
 import './ControlButtons.css'
 import {FilterValuesType} from "../../App";
+import {Button} from "../Button/Button";
 
 
 type ControlButtonsType = {
@@ -13,26 +14,22 @@ const ControlButtons = (props: ControlButtonsType) => {
             return () => props.changeFilter(filter)
         }
 
-        let classButtonAll = (props.filter === "all" ? 'active-filter' : '')
-        let classButtonCompleted = (props.filter === "completed" ? 'active-filter' : '')
-        let classButtonActive = (props.filter === "active" ? 'active-filter' : '')
+        const classButtonAll = (props.filter === "all" ? 'button active-filter' : 'button')
+        const classButtonCompleted = (props.filter === "completed" ? 'button active-filter' : 'button')
+        const classButtonActive = (props.filter === "active" ? 'button active-filter' : 'button')
         return (
             <div>
-                <button
-                    className={classButtonAll}
-                    onClick={onClickButtonChangeFilter('all')}>
-                    All
-                </button>
-                <button
-                    className={classButtonCompleted}
-                    onClick={onClickButtonChangeFilter('completed')}>
-                    Completed
-                </button>
-                <button
-                    className={classButtonActive}
-                    onClick={onClickButtonChangeFilter('active')}>
-                    Active
-                </button>
+
+                <Button name={"All"}
+                        callback={onClickButtonChangeFilter('all')}
+                        classname={classButtonAll}/>
+                <Button name={'Completed'}
+                        callback={onClickButtonChangeFilter('completed')}
+                        classname={classButtonCompleted}/>
+                <Button name={'Active'}
+                        callback={onClickButtonChangeFilter('active')}
+                        classname={classButtonActive}/>
+
             </div>
         );
 

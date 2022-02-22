@@ -11,8 +11,6 @@ type TodoListPropsType = {
     changeFilter: (value: FilterValuesType) => void
     addTask: (title: string) => void
     changeStatus: (taskId: string, isDone: boolean) => void
-    error: string | ''
-    setError: (error: string) => void
     filter: FilterValuesType
 }
 
@@ -29,17 +27,13 @@ const TodoList = (props: TodoListPropsType) => {
     return (
         <div>
             <ToDoListHeader title={props.title}/>
-            <AddTaskForm
-                addTask={props.addTask}
-                error={props.error}
-                setError={props.setError}
-            />
+            <AddTaskForm addTask={props.addTask}/>
             <TaskList
                 tasks={props.tasks}
                 removeTask={props.removeTask}
                 changeFilter={props.changeFilter}
                 changeStatus={props.changeStatus}
-                filter = {props.filter}
+                filter={props.filter}
 
             />
         </div>

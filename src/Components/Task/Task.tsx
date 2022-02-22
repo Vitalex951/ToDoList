@@ -1,5 +1,6 @@
 import React, {ChangeEvent} from 'react';
 import {TaskType} from "../TodoList/TodoList";
+import {Button} from "../Button/Button";
 
 
 type TaskPropsType = TaskType & {
@@ -13,14 +14,15 @@ const Task = (props: TaskPropsType) => {
         props.changeStatus(props.id, event.currentTarget.checked)
     }
     return (
-        <li className={props.isDone? "is-done": ''}>
+        <li>
             <input
-                                onChange={inputChangeStatus}
-                   type="checkbox"
-                   checked={props.isDone}/>
-            <span>{props.title}</span>
-
-            <button onClick={() => props.removeTask(props.id)}>х</button>
+                onChange={inputChangeStatus}
+                type="checkbox"
+                checked={props.isDone}/>
+            <span className={props.isDone ? "is-done" : ''}>{props.title}</span>
+            <Button name={'x'}
+                    callback={() => props.removeTask(props.id)}
+                    classname={''}/>
 
         </li>
     );
