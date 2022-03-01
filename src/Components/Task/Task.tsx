@@ -14,17 +14,33 @@ const Task = (props: TaskPropsType) => {
         props.changeStatus(props.id, event.currentTarget.checked)
     }
     return (
-        <li>
-            <input
-                onChange={inputChangeStatus}
-                type="checkbox"
-                checked={props.isDone}/>
-            <span className={props.isDone ? "is-done" : ''}>{props.title}</span>
-            <Button name={'x'}
-                    callback={() => props.removeTask(props.id)}
-                    classname={''}/>
+        <div className='task'>
+            <li>
 
-        </li>
+                <label className="checkbox-other">
+                    <input className='checkbox'
+                           onChange={inputChangeStatus}
+                           type="checkbox"
+                           checked={props.isDone}/>
+                    <span className={props.isDone ? "is-done" : ''}>{props.title}</span>
+                    <div className='button_deleted'>
+                    <Button name={'x'}
+                            callback={() => props.removeTask(props.id)}
+                            classname={''}/>
+                    </div>
+                </label>
+                {/*<input*/}
+                {/*    className='checkbox'*/}
+                {/*    onChange={inputChangeStatus}*/}
+                {/*    type="checkbox"*/}
+                {/*    checked={props.isDone}/>*/}
+                {/*<span className={props.isDone ? "is-done" : ''}>{props.title}</span>*/}
+                {/*<Button name={'x'}*/}
+                {/*        callback={() => props.removeTask(props.id)}*/}
+                {/*        classname={''}/>*/}
+
+            </li>
+        </div>
     );
 };
 

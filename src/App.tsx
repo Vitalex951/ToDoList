@@ -70,7 +70,6 @@ function App() {
 
 
     return (
-        <>
             <div className="App">
                 <TodoList
                     title={'What to learn'}
@@ -81,7 +80,6 @@ function App() {
                     changeStatus={changeStatus}
                     filter={filter}/>
             </div>
-        </>
     );
 }
 

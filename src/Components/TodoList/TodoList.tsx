@@ -25,19 +25,25 @@ export type TaskType = {
 const TodoList = (props: TodoListPropsType) => {
 
     return (
-        <div>
-            <ToDoListHeader title={props.title}/>
-            <AddTaskForm addTask={props.addTask}/>
-            <TaskList
-                tasks={props.tasks}
-                removeTask={props.removeTask}
-                changeFilter={props.changeFilter}
-                changeStatus={props.changeStatus}
-                filter={props.filter}
-
-            />
+        <div className='container'>
+            <div className='header_div'>
+                <ToDoListHeader title={props.title}/>
+            </div>
+            <div className='add_task'>
+                <AddTaskForm addTask={props.addTask}/>
+            </div>
+            <div>
+                <TaskList
+                    tasks={props.tasks}
+                    removeTask={props.removeTask}
+                    changeFilter={props.changeFilter}
+                    changeStatus={props.changeStatus}
+                    filter={props.filter}
+                />
+            </div>
         </div>
-    );
+    )
+        ;
 };
 
 export default TodoList;

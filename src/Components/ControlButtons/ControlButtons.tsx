@@ -18,7 +18,7 @@ const ControlButtons = (props: ControlButtonsType) => {
         const classButtonCompleted = (props.filter === "completed" ? 'button active-filter' : 'button')
         const classButtonActive = (props.filter === "active" ? 'button active-filter' : 'button')
         return (
-            <div>
+            <div className={"button_filter"}>
 
                 <Button name={"All"}
                         callback={onClickButtonChangeFilter('all')}

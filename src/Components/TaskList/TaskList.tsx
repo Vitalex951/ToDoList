@@ -25,7 +25,7 @@ const TaskList = (props: TaskListPropsType) => {
 
         if (props.tasks.length) {
             return (
-                <>
+                <div>
                     <ul>
                         {tasksComponentsList}
                     </ul>
@@ -33,17 +33,17 @@ const TaskList = (props: TaskListPropsType) => {
                         changeFilter={props.changeFilter}
                         filter={props.filter}
                     />
-                </>
+                </div>
             )
         } else {
             return (
-                <>
+                <div>
                     <span className='error-message'>Add please task or change the filter</span>
                     <ControlButtons
                         changeFilter={props.changeFilter}
                         filter={props.filter}/>
 
-                </>
+                </div>
 
             )
         }

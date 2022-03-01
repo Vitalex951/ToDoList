@@ -8,11 +8,11 @@ body {
     padding: 10px;
     display: flex;
     border-radius: 20px;
-    background-color: rgba(189, 240, 240, 0.3);
+    border-radius: 20px;
+    background-color: rgba(189, 240, 240, 0.8);
     border: 2px solid black;
     max-width: 300px;
     min-height: 300px;
-
 }
 
 .App > div {
@@ -57,7 +57,6 @@ H3:hover {
 /*.active-filter {*/
 /*    background-color: rgba(27, 255, 235, 0.95);*/
 /*}*/
-
 
 
 .is-done {
@@ -108,8 +107,11 @@ H3:hover {
 }
 
 .input-add {
-
     border-radius: 10px;
+}
+
+.input-add:focus {
+    box-shadow: 0 0 10px rgba(37, 59, 255, 0.8);
 }
 
 .active-filter {
@@ -122,17 +124,163 @@ H3:hover {
     /*padding: .8em 2em;*/
     outline: none;
     background-color: deepskyblue;
-    background-image: linear-gradient(45deg, rgba(255,255,255,.0) 30%, rgba(255,255,255,.8), rgba(255,255,255,.0) 70%), radial-gradient(190% 100% at 50% 0%, rgba(255,255,255,.7) 0%, rgba(255,255,255,.5) 50%, rgba(0,0,0,0) 50%);
+    background-image: linear-gradient(45deg, rgba(255, 255, 255, .0) 30%, rgba(255, 255, 255, .8), rgba(255, 255, 255, .0) 70%), radial-gradient(190% 100% at 50% 0%, rgba(255, 255, 255, .7) 0%, rgba(255, 255, 255, .5) 50%, rgba(0, 0, 0, 0) 50%);
     background-repeat: no-repeat;
     background-size: 200% 100%, auto;
     background-position: 200% 0, 0 0;
-    box-shadow: rgba(0,0,0,.3) 0 2px 5px;
+    box-shadow: rgba(0, 0, 0, .3) 0 2px 5px;
 }
+
 .active-filter:active {
     top: 1px;
     box-shadow: none;
 }
+
 .active-filter:hover {
     transition: .5s linear;
     background-position: -200% 0, 0 0;
+}
+
+
+.checkbox-other {
+    display: block;
+    margin: 0 0 10px 0;
+    cursor: default;
+    user-select: none;
+    position: relative;
+}
+
+.checkbox-other input[type=checkbox] {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+    display: block;
+    width: 0;
+    height: 0;
+}
+
+.checkbox-other span {
+    display: inline-block;
+    position: relative;
+    padding: 0 0 0 35px;
+    line-height: 22px;
+}
+
+.checkbox-other span:before {
+    content: "";
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: url(img/checkbox-3.png) 0 0 no-repeat;
+}
+
+.checkbox-other {
+    display: block;
+    margin: 0 0 10px 0;
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+}
+
+.checkbox-other input[type=checkbox] {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+    display: block;
+    width: 0;
+    height: 0;
+}
+
+.checkbox-other span {
+    display: inline-block;
+    position: relative;
+    padding: 0 0 0 35px;
+    line-height: 22px;
+}
+
+.checkbox-other span:before {
+    content: "";
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    transition: background 0.3s ease;
+    background: url(img/checkbox-3.png) 0 0 no-repeat;
+}
+
+li {
+    list-style-type: none;
+
+}
+
+li span {
+    cursor: default;
+}
+
+
+/* Checked */
+.checkbox-other input[type=checkbox]:checked + span:before {
+    background-image: url(img/checkbox-2.png);
+}
+
+/* Focus */
+.focused span:before {
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, .25);
+}
+
+/* Hover */
+.checkbox-other span:hover:before {
+    filter: brightness(110%);
+
+}
+
+/* Active */
+.checkbox-other span:active:before {
+    filter: brightness(80%);
+}
+
+/* Disabled */
+.checkbox-other input[type=checkbox]:disabled + span {
+    color: #666;
+
+}
+
+.checkbox-other input[type=checkbox]:disabled + span:before {
+    filter: grayscale(100%);
+    opacity: 0.6;
+
+}
+
+.button_filter {
+    /*display: flex;*/
+    /*justify-content: space-around;*/
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+
+.header_div {
+
+}
+
+.add_task {
+    /*flex: 1 1 auto;*/
+}
+
+.tasks_filter {
+
+}
+.button_deleted {
+    display: inline-block;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
 }

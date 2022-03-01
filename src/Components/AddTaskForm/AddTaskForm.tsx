@@ -19,15 +19,7 @@ const AddTaskForm = (props: AddTaskFormPropsType) => {
             setError('Error')
         }
     }
-    const onChangeSetTitle = (e: ChangeEvent<HTMLInputElement>) => {
-        setTitle(e.currentTarget.value)
-        setError('')
-    }
-    const onKeyPressTitle = (e: KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === 'Enter') {
-            onClickAddTask()
-        }
-    }
+
     let classError = (error ? 'input-add error' : 'input-add')
     return (
         <div>
