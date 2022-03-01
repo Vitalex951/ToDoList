@@ -52,11 +52,10 @@ H3:hover {
 
 .error-message {
     color: red;
+    max-width: 200px;
+    text-align: center;
+    font-size: 16px;
 }
-
-/*.active-filter {*/
-/*    background-color: rgba(27, 255, 235, 0.95);*/
-/*}*/
 
 
 .is-done {
@@ -68,12 +67,7 @@ H3:hover {
     border-radius: 5px;
 }
 
-/*.add-task-button {*/
-/*    width: 38px;*/
-/*    height: 25px;*/
-/*    border-radius: 40%;*/
-/*    background-color: rgba(255, 216, 19, 0.9);*/
-/*}*/
+
 
 .button9 {
     position: relative;
@@ -257,8 +251,8 @@ li span {
 }
 
 .button_filter {
-    /*display: flex;*/
-    /*justify-content: space-around;*/
+    display: flex;
+    justify-content: space-around;
 }
 
 .container {
@@ -273,7 +267,7 @@ li span {
 }
 
 .add_task {
-    /*flex: 1 1 auto;*/
+    flex: 1 1 auto;
 }
 
 .tasks_filter {
@@ -283,4 +277,8 @@ li span {
     display: inline-block;
     flex-wrap: nowrap;
     justify-content: flex-end;
+}
+
+.main {
+    min-height: 180px;
 }

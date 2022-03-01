@@ -3,6 +3,7 @@ import ToDoListHeader from "../TodoListHeader/ToDoListHeader";
 import TaskList from "../TaskList/TaskList";
 import AddTaskForm from "../AddTaskForm/AddTaskForm";
 import {FilterValuesType} from "../../App";
+import ControlButtons from "../ControlButtons/ControlButtons";
 
 type TodoListPropsType = {
     title: string
@@ -32,7 +33,7 @@ const TodoList = (props: TodoListPropsType) => {
             <div className='add_task'>
                 <AddTaskForm addTask={props.addTask}/>
             </div>
-            <div>
+            <div className='main'>
                 <TaskList
                     tasks={props.tasks}
                     removeTask={props.removeTask}
@@ -40,6 +41,11 @@ const TodoList = (props: TodoListPropsType) => {
                     changeStatus={props.changeStatus}
                     filter={props.filter}
                 />
+            </div>
+            <div>
+                <ControlButtons
+                    changeFilter={props.changeFilter}
+                    filter={props.filter}/>
             </div>
         </div>
     )

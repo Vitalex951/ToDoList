@@ -23,31 +23,17 @@ const TaskList = (props: TaskListPropsType) => {
             }
         )
 
-        if (props.tasks.length) {
-            return (
-                <div>
-                    <ul>
-                        {tasksComponentsList}
-                    </ul>
-                    <ControlButtons
-                        changeFilter={props.changeFilter}
-                        filter={props.filter}
-                    />
-                </div>
-            )
-        } else {
-            return (
-                <div>
-                    <span className='error-message'>Add please task or change the filter</span>
-                    <ControlButtons
-                        changeFilter={props.changeFilter}
-                        filter={props.filter}/>
 
-                </div>
+            return (
+                <>
+                    {props.tasks.length? <div className="main">
+                        <ul>
+                            {tasksComponentsList}
+                        </ul>
+                    </div> : <div className='error-message'> Add please task or change on filter</div>}
+               </>
 
             )
-        }
-
     }
 ;
 
