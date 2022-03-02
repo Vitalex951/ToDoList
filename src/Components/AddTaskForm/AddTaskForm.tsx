@@ -3,7 +3,8 @@ import {Button} from "../Button/Button";
 import {Input} from "../Input/Input";
 
 type AddTaskFormPropsType = {
-    addTask: (title: string) => void
+    todoListID: string
+    addTask: (taskId: string, title: string) => void
 }
 
 const AddTaskForm = (props: AddTaskFormPropsType) => {
@@ -12,7 +13,7 @@ const AddTaskForm = (props: AddTaskFormPropsType) => {
     const [error, setError] = useState<string | ''>('')
     const onClickAddTask = () => {
         if (title.trim()) {
-            props.addTask(title.trim())
+            props.addTask(props.todoListID, title.trim())
             setTitle('')
             setError('')
         } else {

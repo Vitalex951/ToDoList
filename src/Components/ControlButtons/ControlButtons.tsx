@@ -5,13 +5,14 @@ import {Button} from "../Button/Button";
 
 
 type ControlButtonsType = {
-    changeFilter: (value: FilterValuesType) => void
+    todoListID: string
+    changeFilter: (todoListID: string, value: FilterValuesType) => void
     filter: FilterValuesType
 }
 
 const ControlButtons = (props: ControlButtonsType) => {
         const onClickButtonChangeFilter = (filter: FilterValuesType) => {
-            return () => props.changeFilter(filter)
+            return () => props.changeFilter(props.todoListID, filter)
         }
 
         const classButtonAll = (props.filter === "all" ? 'button active-filter' : 'button')

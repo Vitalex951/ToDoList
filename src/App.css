@@ -4,25 +4,29 @@ body {
 }
 
 .App {
-    margin: 50px auto auto auto;
+    margin: 0 auto;
+    max-width: 600px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.todolist {
+    margin: 10px auto 20px auto;
     padding: 10px;
     display: flex;
     border-radius: 20px;
-    border-radius: 20px;
     background-color: rgba(189, 240, 240, 0.8);
     border: 2px solid black;
-    max-width: 300px;
+    max-width: 250px;
     min-height: 300px;
-}
-
-.App > div {
-    margin: auto;
 }
 
 .header {
     font-style: italic;
     font-size: 25px;
     text-align: center;
+    margin: 5px;
 }
 
 H3 {
@@ -66,7 +70,6 @@ H3:hover {
 .button {
     border-radius: 5px;
 }
-
 
 
 .button9 {
@@ -258,13 +261,10 @@ li span {
 .container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    margin: auto;
 
 }
 
-.header_div {
-
-}
 
 .add_task {
     flex: 1 1 auto;
@@ -273,6 +273,7 @@ li span {
 .tasks_filter {
 
 }
+
 .button_deleted {
     display: inline-block;
     flex-wrap: nowrap;
@@ -281,4 +282,18 @@ li span {
 
 .main {
     min-height: 180px;
+}
+
+.button_deleted_toDolist {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.removeToDoList {
+    background-color: #FFFFFF;
+    border-radius: 20px;
+}
+
+.removeToDoList:hover {
+    background-color: yellow;
 }

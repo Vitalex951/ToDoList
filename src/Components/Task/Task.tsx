@@ -4,14 +4,15 @@ import {Button} from "../Button/Button";
 
 
 type TaskPropsType = TaskType & {
-    removeTask: (id: string) => void
-    changeStatus: (taskId: string, isDone: boolean) => void
+    removeTask: (todoListID: string, id: string) => void
+    changeStatus: (todoListID: string, taskID: string, isDone: boolean) => void
+    todoListID: string
 }
 
 
 const Task = (props: TaskPropsType) => {
     const inputChangeStatus = (event: ChangeEvent<HTMLInputElement>) => {
-        props.changeStatus(props.id, event.currentTarget.checked)
+        props.changeStatus(props.todoListID, props.id, event.currentTarget.checked)
     }
     return (
         <div className='task'>
@@ -24,9 +25,9 @@ const Task = (props: TaskPropsType) => {
                            checked={props.isDone}/>
                     <span className={props.isDone ? "is-done" : ''}>{props.title}</span>
                     <div className='button_deleted'>
-                    <Button name={'x'}
-                            callback={() => props.removeTask(props.id)}
-                            classname={''}/>
+                        <Button name={'x'}
+                                callback={() => props.removeTask(props.todoListID, props.id)}
+                                classname={''}/>
                     </div>
                 </label>
                 {/*<input*/}

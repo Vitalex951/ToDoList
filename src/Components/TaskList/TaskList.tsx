@@ -7,10 +7,10 @@ import {FilterValuesType} from "../../App";
 
 type TaskListPropsType = {
     tasks: Array<TaskType>
-    removeTask: (id: string) => void
-    changeFilter: (value: FilterValuesType) => void
-    changeStatus: (taskId: string, isDone: boolean) => void
+    removeTask: (todoListID: string, id: string) => void
+    changeStatus: (todoListID: string, taskID: string, isDone: boolean) => void
     filter: FilterValuesType
+    todoListID: string
 }
 
 const TaskList = (props: TaskListPropsType) => {
@@ -19,21 +19,22 @@ const TaskList = (props: TaskListPropsType) => {
                 return <Task key={task.id}
                              {...task}
                              changeStatus={props.changeStatus}
-                             removeTask={props.removeTask}/>
+                             removeTask={props.removeTask}
+                             todoListID={props.todoListID}/>
             }
         )
 
 
-            return (
-                <>
-                    {props.tasks.length? <div className="main">
-                        <ul>
-                            {tasksComponentsList}
-                        </ul>
-                    </div> : <div className='error-message'> Add please task or change on filter</div>}
-               </>
+        return (
+            <>
+                {props.tasks.length ? <div className="main">
+                    <ul>
+                        {tasksComponentsList}
+                    </ul>
+                </div> : <div className='error-message'> Add please task or change on filter</div>}
+            </>
 
-            )
+        )
     }
 ;
 
