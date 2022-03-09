@@ -16,6 +16,8 @@ type TodoListPropsType = {
     changeStatus: (todoListID: string, taskID: string, isDone: boolean) => void
     filter: FilterValuesType
     removeToDoList: (todoListID: string) => void
+    updateTitleTask:(todolistID:string, taskID: string, title: string) => void
+    updateToDoList:(todolistID:string, title:string) => void
 }
 
 
@@ -26,7 +28,15 @@ export type TaskType = {
 }
 
 const TodoList = (props: TodoListPropsType) => {
-
+    const addTask = (title:string) => {
+        props.addTask(props.todoListID, title)
+    }
+    const updateTitleTask = (taskID: string, title:string) => {
+        props.updateTitleTask(props.todoListID, taskID, title)
+    }
+const updateToDoList = (title: string) => {
+        props.updateToDoList(props.todoListID, title)
+}
     return (
         <div className='container'>
             <div className='header_div'>
@@ -36,12 +46,13 @@ const TodoList = (props: TodoListPropsType) => {
                         callback={() => props.removeToDoList(props.todoListID)}
                         classname={'removeToDoList'}/>
                 </div>
-                <ToDoListHeader title={props.title}/>
+                <ToDoListHeader
+                    title={props.title}
+                    updateToDoList={updateToDoList}/>
             </div>
             <div className='add_task'>
                 <AddTaskForm
-                    addTask={props.addTask}
-                    todoListID={props.todoListID}/>
+                    callback={addTask}/>
             </div>
             <div className='main'>
                 <TaskList
@@ -49,7 +60,8 @@ const TodoList = (props: TodoListPropsType) => {
                     removeTask={props.removeTask}
                     changeStatus={props.changeStatus}
                     filter={props.filter}
-                    todoListID={props.todoListID}/>
+                    todoListID={props.todoListID}
+                    updateTitleTask={updateTitleTask}/>
             </div>
             <div>
                 <ControlButtons

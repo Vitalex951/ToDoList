@@ -3,7 +3,7 @@ body {
     background-size: 100%;
 }
 
-.App {
+.main_container {
     margin: 0 auto;
     max-width: 600px;
     display: flex;
@@ -12,7 +12,7 @@ body {
 }
 
 .todolist {
-    margin: 10px auto 20px auto;
+    margin: 0 auto 20px auto;
     padding: 10px;
     display: flex;
     border-radius: 20px;
@@ -296,4 +296,8 @@ li span {
 
 .removeToDoList:hover {
     background-color: yellow;
+}
+
+.addTodolist {
+    margin: 10px;
 }

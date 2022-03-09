@@ -11,16 +11,22 @@ type TaskListPropsType = {
     changeStatus: (todoListID: string, taskID: string, isDone: boolean) => void
     filter: FilterValuesType
     todoListID: string
+    updateTitleTask: (taskID: string, title:string) => void
 }
 
 const TaskList = (props: TaskListPropsType) => {
-
+        const updateTitleTask = (taskID: string, title:string) => {
+            props.updateTitleTask(taskID, title)
+        }
         const tasksComponentsList = props.tasks.map(task => {
                 return <Task key={task.id}
+                             title={task.title}
+                             id={task.id}
                              {...task}
                              changeStatus={props.changeStatus}
                              removeTask={props.removeTask}
-                             todoListID={props.todoListID}/>
+                             todoListID={props.todoListID}
+                             updateTitleTask={updateTitleTask}/>
             }
         )
 
