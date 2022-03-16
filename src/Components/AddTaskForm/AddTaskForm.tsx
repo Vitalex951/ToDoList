@@ -1,6 +1,6 @@
-import React, {ChangeEvent, useState, KeyboardEvent} from 'react';
-import {Button} from "../Button/Button";
-import {Input} from "../Input/Input";
+import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
+import {IconButton, TextField} from "@material-ui/core";
+import {AddBox} from "@material-ui/icons";
 
 type AddTaskFormPropsType = {
     callback: (title: string) => void
@@ -13,6 +13,7 @@ const AddTaskForm = (props: AddTaskFormPropsType) => {
 
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setTitle(e.currentTarget.value)
+        setError('')
     }
     const onClickAddTask = () => {
         if (title.trim()) {
@@ -20,7 +21,7 @@ const AddTaskForm = (props: AddTaskFormPropsType) => {
             setTitle('')
             setError('')
         } else {
-            setError('Error')
+            setError('Title is required')
         }
     }
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -33,14 +34,26 @@ const AddTaskForm = (props: AddTaskFormPropsType) => {
     let classError = (error ? 'input-add error' : 'input-add')
     return (
         <div>
-            <input
-                value={title}
-                onChange={onChangeHandler}
-                onKeyPress={onKeyPressHandler}
-                className={classError}
-            />
-            <button onClick={onClickAddTask}>+</button>
-            {error && <div className="error-message">{error}</div>}
+            <TextField value={title}
+                       onChange={onChangeHandler}
+                       onKeyPress={onKeyPressHandler}
+                       id="standard-basic"
+                       label="Type value"
+                       variant="standard"
+                       error={!!error}
+                       helperText={error}
+                       autoComplete='off'
+                     />
+            {/*<input*/}
+            {/*    value={title}*/}
+            {/*    onChange={onChangeHandler}*/}
+            {/*    onKeyPress={onKeyPressHandler}*/}
+            {/*    className={classError}*/}
+            {/*/>*/}
+            <IconButton onClick={onClickAddTask} size={"small"}>
+               <AddBox/>
+            </IconButton>
+            {/*{error && <div className="error-message">{error}</div>}*/}
         </div>
     );
 };

@@ -6,7 +6,7 @@ type ButtonPropsType = {
     classname: string
 }
 
-export const Button = (props: ButtonPropsType) => {
+export const ButtonMy = (props: ButtonPropsType) => {
     const onClickButtonHeader = () => {
         props.callback()
     }

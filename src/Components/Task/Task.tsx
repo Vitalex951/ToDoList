@@ -1,7 +1,8 @@
 import React, {ChangeEvent} from 'react';
 import {TaskType} from "../TodoList/TodoList";
-import {Button} from "../Button/Button";
 import {EditableSpan} from "../EditableSpan/EditableSpan";
+import {Checkbox, IconButton} from "@material-ui/core";
+import {Delete} from "@material-ui/icons";
 
 
 type TaskPropsType = TaskType & {
@@ -21,21 +22,29 @@ const Task = (props: TaskPropsType) => {
     const updateTitleToDolist = (title: string) => {
         props.updateTitleTask(props.id, title)
     }
+    const removeTask = () => {
+        props.removeTask(props.todoListID, props.id)
+    }
     return (
         <div className='task'>
             <li>
-
                 <label className="checkbox-other">
-                    <input className='checkbox'
-                           onChange={inputChangeStatus}
-                           type="checkbox"
-                           checked={props.isDone}/>
-                    {/*<span className={props.isDone ? "is-done" : ''}>{props.title}</span>*/}
-                   <EditableSpan oldTitle={props.title} callback={updateTitleToDolist} />
-                    <div className='button_deleted'>
-                        <Button name={'x'}
-                                callback={() => props.removeTask(props.todoListID, props.id)}
-                                classname={''}/>
+                    <div className='labelcontainer'>
+                        {/*<input className='checkbox'*/}
+                        {/*       onChange={inputChangeStatus}*/}
+                        {/*       type="checkbox"*/}
+                        {/*       checked={props.isDone}/>*/}
+                        <Checkbox onChange={inputChangeStatus} checked={props.isDone}/>
+                        <EditableSpan oldTitle={props.title} callback={updateTitleToDolist}/>
+
+                        {/*/!*<div className='button_deleted'>*!/*/}
+                        {/*<ButtonMy name={'x'}*/}
+                        {/*          callback={removeTask}*/}
+                        {/*          classname={''}/>*/}
+                        <IconButton onClick={removeTask} size={"small"}>
+                            <Delete/>
+                        </IconButton>
+
                     </div>
                 </label>
                 {/*<input*/}
