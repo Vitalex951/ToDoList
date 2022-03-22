@@ -42,8 +42,8 @@ const AddTaskForm = (props: AddTaskFormPropsType) => {
                        variant="standard"
                        error={!!error}
                        helperText={error}
-                // autoComplete='off'
-                     />
+                       // autoComplete='off'
+            />
             {/*<input*/}
             {/*    value={title}*/}
             {/*    onChange={onChangeHandler}*/}
@@ -51,7 +51,7 @@ const AddTaskForm = (props: AddTaskFormPropsType) => {
             {/*    className={classError}*/}
             {/*/>*/}
             <IconButton onClick={onClickAddTask} size={"small"}>
-               <AddBox/>
+                <AddBox/>
             </IconButton>
             {/*{error && <div className="error-message">{error}</div>}*/}
         </div>
