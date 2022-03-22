@@ -18,7 +18,7 @@ export const todoListReducer = (state: Array<TodolistsType>, action: todoListRed
                 }]
         }
         case "UPDATE-TODOLIST": {
-            return state.map(el => el.id === action.payload.todoListID? {...el, title: action.payload.title}: el)
+            return state.map(el => el.id === action.payload.todoListID ? {...el, title: action.payload.title} : el)
         }
         default:
             return state

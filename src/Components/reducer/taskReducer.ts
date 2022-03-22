@@ -1,7 +1,6 @@
 import {TaskObjetType} from "../../App";
 import {v1} from "uuid";
 
-
 export const tasksReducer = (state: TaskObjetType, action: taskReducerType): TaskObjetType => {
     switch (action.type) {
         case "REMOVE-TASK": {
@@ -39,8 +38,6 @@ export const tasksReducer = (state: TaskObjetType, action: taskReducerType): Tas
         case "ADD-TODOLIST": {
             return {...state, [action.payload.newId]: []}
         }
-
-
         default:
             return state
     }
