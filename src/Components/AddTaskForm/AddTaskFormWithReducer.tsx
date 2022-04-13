@@ -6,17 +6,17 @@ type AddTaskFormPropsType = {
     callback: (title: string) => void
 }
 
-export const AddTaskForm = React.memo((props: AddTaskFormPropsType) => {
-    console.log('AddTaskForm')
+export const AddTaskFormWithRedux = React.memo((props: AddTaskFormPropsType) => {
+    console.log('AddTaskFormWithRedux')
     const [title, setTitle] = useState<string>('')
     const [error, setError] = useState<string | ''>('')
 
-    const onChangeHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    console.log(title)
+    const onChangeHandler =useCallback( (e: ChangeEvent<HTMLInputElement>) => {
         setTitle(e.currentTarget.value)
         setError('')
     }, [])
-
-    const onClickAddTask = useCallback(() => {
+    const onClickAddTask =useCallback( () => {
         if (title.trim()) {
             props.callback(title.trim())
             setTitle('')
@@ -24,15 +24,13 @@ export const AddTaskForm = React.memo((props: AddTaskFormPropsType) => {
         } else {
             setError('Title is required')
         }
-    }, [title])
+    }, [title, props.callback] )
+
     const onKeyPressHandler = useCallback((e: KeyboardEvent<HTMLInputElement>) => {
         if (e.charCode === 13) {
             onClickAddTask()
         }
     }, [])
-
-
-    let classError = (error ? 'input-add error' : 'input-add')
     return (
         <div>
             <TextField value={title}
@@ -43,6 +41,7 @@ export const AddTaskForm = React.memo((props: AddTaskFormPropsType) => {
                        variant="standard"
                        error={!!error}
                        helperText={error}
+                // autoComplete='off'
             />
             <IconButton onClick={onClickAddTask} size={"small"}>
                 <AddBox/>

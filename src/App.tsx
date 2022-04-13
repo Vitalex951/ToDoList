@@ -2,7 +2,7 @@ import React, {useReducer, useState} from 'react';
 import './App.css';
 import TodoList, {TaskType} from "./Components/TodoList/TodoList"
 import {v1} from "uuid";
-import AddTaskForm from "./Components/AddTaskForm/AddTaskForm";
+import {AddTaskForm} from "./Components/AddTaskForm/AddTaskForm";
 import {AppBar, Box, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@material-ui/core";
 import {Menu} from "@material-ui/icons";
 import {
@@ -13,7 +13,6 @@ import {
     updateToDoListAC
 } from "./Components/reducer/todolistReducer";
 import {
-    addEmptyTaskAC,
     addTaskAC,
     changeStatusAC,
     removeTaskAC,
@@ -81,35 +80,41 @@ function App() {
     //     ]
     // });
 
+
+    //TodoList
     function removeToDoList(todoListID: string) {
         todolistsDispatch(removeTodoListAC(todoListID))
-        delete tasks[todoListID]
+        tasksDispatch(removeTodoListAC(todoListID))
     }
 
-    function removeTask(todoListID: string, id: string) {
-        tasksDispatch(removeTaskAC(todoListID, id))
+    const updateToDoList = (todoListID: string, title: string) => {
+        todolistsDispatch(updateToDoListAC(todoListID, title))
+    }
+    const addTodoList = (title: string) => {
+        let newTodolist = addTodoListAC(title)
+        todolistsDispatch(newTodolist)
+        tasksDispatch(newTodolist)
     }
 
     function changeFilter(todoListID: string, filter: FilterValuesType) {
         todolistsDispatch(changeFilterAC(todoListID, filter))
     }
 
+
+     //tasks
     const changeStatus = (todoListID: string, taskID: string, isDone: boolean) => {
         tasksDispatch(changeStatusAC(todoListID, taskID, isDone))
     }
     const addTask = (todoListID: string, title: string) => {
         tasksDispatch(addTaskAC(todoListID, title))
     }
-    const addTodoList = (title: string) => {
-        let newId = v1()
-        todolistsDispatch(addTodoListAC(newId, title))
-        tasksDispatch(addEmptyTaskAC(newId))
-    }
-    const updateToDoList = (todoListID: string, title: string) => {
-        todolistsDispatch(updateToDoListAC(todoListID, title))
-    }
+
     const updateTitleTask = (todolistID: string, taskID: string, title: string) => {
         tasksDispatch(updateTitleTaskAC(todolistID, taskID, title))
+    }
+
+    function removeTask(todoListID: string, id: string) {
+        tasksDispatch(removeTaskAC(todoListID, id))
     }
 
     return (
@@ -154,7 +159,6 @@ function App() {
                             <Grid item>
                                 <Paper elevation={8} style={{padding: "10px"}}>
                                     <div className="todolist">
-
                                         <TodoList
                                             removeToDoList={removeToDoList}
                                             title={el.title}

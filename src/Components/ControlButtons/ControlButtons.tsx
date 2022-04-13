@@ -1,7 +1,6 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import './ControlButtons.css'
 import {FilterValuesType} from "../../App";
-import {ButtonMy} from "../Button/ButtonMy";
 import {Button} from "@material-ui/core";
 
 
@@ -11,14 +10,11 @@ type ControlButtonsType = {
     filter: FilterValuesType
 }
 
-const ControlButtons = (props: ControlButtonsType) => {
-        const onClickButtonChangeFilter = (filter: FilterValuesType) => {
+export const ControlButtons =React.memo( (props: ControlButtonsType) => {
+        const onClickButtonChangeFilter = useCallback((filter: FilterValuesType) => {
             return () => props.changeFilter(props.todoListID, filter)
-        }
+        }, [props.changeFilter, props.todoListID])
 
-        // const classButtonAll = (props.filter === "all" ? 'button active-filter' : 'button')
-        // const classButtonCompleted = (props.filter === "completed" ? 'button active-filter' : 'button')
-        // const classButtonActive = (props.filter === "active" ? 'button active-filter' : 'button')
         return (
             <div className={"button_filter"}>
                 <Button variant={props.filter === "all" ? 'contained' : 'text'} size="small" onClick={onClickButtonChangeFilter('all')}>
@@ -43,6 +39,4 @@ const ControlButtons = (props: ControlButtonsType) => {
             </div>
         );
 
-    }
-;
-export default ControlButtons;
+    });

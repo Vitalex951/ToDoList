@@ -1,10 +1,9 @@
 import React from 'react';
 import ToDoListHeader from "../TodoListHeader/ToDoListHeader";
 import TaskList from "../TaskList/TaskList";
-import AddTaskForm from "../AddTaskForm/AddTaskForm";
+import {AddTaskForm} from "../AddTaskForm/AddTaskForm";
 import {FilterValuesType} from "../../App";
-import ControlButtons from "../ControlButtons/ControlButtons";
-import {ButtonMy} from "../Button/ButtonMy";
+import {ControlButtons} from "../ControlButtons/ControlButtons";
 import {Delete} from "@material-ui/icons";
 import {IconButton} from "@material-ui/core";
 
