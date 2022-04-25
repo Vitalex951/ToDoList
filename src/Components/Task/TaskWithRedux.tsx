@@ -7,7 +7,7 @@ import {useDispatch} from "react-redux";
 import {changeStatusAC, removeTaskAC, updateTitleTaskAC} from "../reducer/taskReducer";
 
 
-type TaskPropsType = TaskType & {
+export type TaskPropsType = TaskType & {
     id: string
     title: string
     todoListID: string

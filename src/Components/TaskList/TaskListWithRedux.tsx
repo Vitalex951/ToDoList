@@ -9,25 +9,25 @@ type TaskListPropsType = {
 
 }
 
-export  const TaskListWithRedux = React.memo((props: TaskListPropsType) => {
+export const TaskListWithRedux = React.memo(({tasks, todoListID}: TaskListPropsType) => {
     console.log('TaskListWithRedux')
-        const tasksComponentsList = props.tasks.map(task => {
-                return <TaskWithRedux key={task.id}
-                             {...task}
-                            todoListID={props.todoListID}
+    const tasksComponentsList = tasks.map(task => {
+            return <TaskWithRedux
+                key={task.id}
+                {...task}
+                todoListID={todoListID}
+            />
+        }
+    )
 
-                />
-            }
-        )
+    return (
+        <>
+            {tasks.length ? <div className="main">
+                <ul>
+                    {tasksComponentsList}
+                </ul>
+            </div> : <div className='error-message'> Add please task or change on filter</div>}
+        </>
 
-        return (
-            <>
-                {props.tasks.length ? <div className="main">
-                    <ul>
-                        {tasksComponentsList}
-                    </ul>
-                </div> : <div className='error-message'> Add please task or change on filter</div>}
-            </>
-
-        )
-    });
+    )
+});

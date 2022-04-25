@@ -25,7 +25,9 @@ export const EditableSpan = React.memo((props: EditableSpanPropsType) => {
     }
     return (
         edit ? <TextField value={newTitle}
-                          className={s.input} onChange={onChangeHandler} onBlur={onBlurHandler}
+                          className={s.input}
+                          onChange={onChangeHandler}
+                          onBlur={onBlurHandler}
                           autoFocus
                           variant="standard"/>
             : <span onDoubleClick={onDoubleClickHandler}>{props.oldTitle}</span>

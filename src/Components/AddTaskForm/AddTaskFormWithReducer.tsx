@@ -11,20 +11,19 @@ export const AddTaskFormWithRedux = React.memo((props: AddTaskFormPropsType) => 
     const [title, setTitle] = useState<string>('')
     const [error, setError] = useState<string | ''>('')
 
-    console.log(title)
-    const onChangeHandler =useCallback( (e: ChangeEvent<HTMLInputElement>) => {
+    const onChangeHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         setTitle(e.currentTarget.value)
         setError('')
     }, [])
-    const onClickAddTask =useCallback( () => {
+    const onClickAddTask = useCallback(() => {
         if (title.trim()) {
             props.callback(title.trim())
             setTitle('')
-            setError('')
+            if (error !== '') setError('')
         } else {
             setError('Title is required')
         }
-    }, [title, props.callback] )
+    }, [title, props.callback])
 
     const onKeyPressHandler = useCallback((e: KeyboardEvent<HTMLInputElement>) => {
         if (e.charCode === 13) {
