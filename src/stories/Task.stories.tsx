@@ -3,8 +3,8 @@ import {ComponentMeta, ComponentStory} from '@storybook/react';
 import {TaskWithRedux} from "../Components/Task/TaskWithRedux";
 import {ReduxStoreProviderDecorator} from "./ReduxStoreProviderDecorator";
 import {useSelector} from "react-redux";
-import {AppRootStateType} from "../Components/state/state";
-import {TaskType} from "../Components/TodoList/TodoListWithRedux";
+import {AppRootStateType} from "../Components/state/store";
+import {TaskType} from "../api/todos-api";
 
 
 export default {
@@ -35,11 +35,19 @@ const Template: ComponentStory<typeof TaskUsingRedux> = () => <TaskUsingRedux/>;
 
 
 const TaskUsingRedux = () => {
-    const task1 = useSelector<AppRootStateType, TaskType>(state => state.tasks["todolistId1"][0])
-    const task2 = useSelector<AppRootStateType, TaskType>(state => state.tasks["todolistId2"][0])
+    const task1 = useSelector<AppRootStateType, TaskType>(state => state.tasks["todolistID1"][0])
+    const task2 = useSelector<AppRootStateType, TaskType>(state => state.tasks["todolistID2"][0])
     return (<>
-            <TaskWithRedux id={task1.id} title={task1.title} isDone={task1.isDone} todoListID={'todolistId1'}/>
-            <TaskWithRedux id={task2.id} title={task2.title} isDone={task2.isDone} todoListID={'todolistId2'}/>
+            <TaskWithRedux
+                todoListID={'todolistID1'}
+                task={task1}
+                {...task1}
+            />
+            <TaskWithRedux
+                {...task2}
+                todoListID={'todolistID2'}
+                task={task2}
+            />
         </>
     )
 }

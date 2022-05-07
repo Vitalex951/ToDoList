@@ -1,15 +1,15 @@
 import React, {ChangeEvent} from 'react';
-import {TaskType} from "../TodoList/TodoList";
 import {EditableSpan} from "../EditableSpan/EditableSpan";
 import {Checkbox, IconButton} from "@material-ui/core";
 import {Delete} from "@material-ui/icons";
+import {TaskStatuses, TaskType} from "../../api/todos-api";
 
 
 type TaskPropsType = TaskType & {
     id: string
     title: string
     removeTask: (todoListID: string, id: string) => void
-    changeStatus: (todoListID: string, taskID: string, isDone: boolean) => void
+    changeStatus: (todoListID: string, taskID: string, status: TaskStatuses) => void
     todoListID: string
     updateTitleTask: (taskID: string, title: string) => void
 }
@@ -17,7 +17,7 @@ type TaskPropsType = TaskType & {
 
 const Task = (props: TaskPropsType) => {
     const inputChangeStatus = (event: ChangeEvent<HTMLInputElement>) => {
-        props.changeStatus(props.todoListID, props.id, event.currentTarget.checked)
+        props.changeStatus(props.todoListID, props.id, event.currentTarget.checked? TaskStatuses.Completed: TaskStatuses.New)
     }
     const updateTitleToDolist = (title: string) => {
         props.updateTitleTask(props.id, title)
@@ -34,7 +34,7 @@ const Task = (props: TaskPropsType) => {
                         {/*       onChange={inputChangeStatus}*/}
                         {/*       type="checkbox"*/}
                         {/*       checked={props.isDone}/>*/}
-                        <Checkbox onChange={inputChangeStatus} checked={props.isDone}/>
+                        <Checkbox onChange={inputChangeStatus} checked={props.status === TaskStatuses.Completed}/>
                         <EditableSpan oldTitle={props.title} callback={updateTitleToDolist}/>
 
                         {/*/!*<div className='button_deleted'>*!/*/}

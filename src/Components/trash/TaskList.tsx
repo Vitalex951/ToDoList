@@ -1,13 +1,13 @@
 import React from 'react';
-import Task from "../Task/Task";
-import {TaskType} from "../TodoList/TodoList";
-import {FilterValuesType} from "../../App";
+import Task from "./Task";
+import {FilterValuesType} from "../../app/App";
+import {TaskStatuses, TaskType} from "../../api/todos-api";
 
 
 type TaskListPropsType = {
     tasks: Array<TaskType>
     removeTask: (todoListID: string, id: string) => void
-    changeStatus: (todoListID: string, taskID: string, isDone: boolean) => void
+    changeStatus: (todoListID: string, taskID: string, status: TaskStatuses) => void
     filter: FilterValuesType
     todoListID: string
     updateTitleTask: (taskID: string, title: string) => void

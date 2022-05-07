@@ -1,11 +1,12 @@
 import React from 'react';
 import ToDoListHeader from "../TodoListHeader/ToDoListHeader";
-import TaskList from "../TaskList/TaskList";
-import {AddTaskForm} from "../AddTaskForm/AddTaskForm";
-import {FilterValuesType} from "../../App";
+import TaskList from "./TaskList";
+import {AddTaskForm} from "./AddTaskForm";
+import {FilterValuesType} from "../../app/App";
 import {ControlButtons} from "../ControlButtons/ControlButtons";
 import {Delete} from "@material-ui/icons";
 import {IconButton} from "@material-ui/core";
+import {TaskStatuses, TaskType} from "../../api/todos-api";
 
 type TodoListPropsType = {
     todoListID: string
@@ -14,7 +15,7 @@ type TodoListPropsType = {
     removeTask: (todoListID: string, id: string) => void
     changeFilter: (todoListID: string, value: FilterValuesType) => void
     addTask: (todoListID: string, title: string) => void
-    changeStatus: (todoListID: string, taskID: string, isDone: boolean) => void
+    changeStatus: (todoListID: string, taskID: string, status: TaskStatuses) => void
     filter: FilterValuesType
     removeToDoList: (todoListID: string) => void
     updateTitleTask: (todolistID: string, taskID: string, title: string) => void
@@ -22,11 +23,11 @@ type TodoListPropsType = {
 }
 
 
-export type TaskType = {
-    id: string
-    title: string
-    isDone: boolean
-}
+// type TaskType = {
+//     id: string
+//     title: string
+//     isDone: boolean
+// }
 
 const TodoList = (props: TodoListPropsType) => {
     const addTask = (title: string) => {

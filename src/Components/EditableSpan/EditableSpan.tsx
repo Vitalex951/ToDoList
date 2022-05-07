@@ -8,17 +8,18 @@ type EditableSpanPropsType = {
 }
 
 export const EditableSpan = React.memo((props: EditableSpanPropsType) => {
-    console.log('EditableSpan')
+
     const [edit, setEdit] = useState<boolean>(false)
     const [newTitle, setNewTitle] = useState<string>(props.oldTitle)
 
     const onChangeHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         setNewTitle(e.currentTarget.value)
-    }, [])
+    }, [newTitle])
+
     const onBlurHandler = useCallback(() => {
         props.callback(newTitle)
         setEdit(false)
-    }, [])
+    }, [newTitle])
 
     const onDoubleClickHandler = () => {
         setEdit(true)

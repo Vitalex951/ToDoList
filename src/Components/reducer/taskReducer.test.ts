@@ -1,143 +1,165 @@
-import {v1} from "uuid";
-import {TaskObjetType} from "../../App";
-import {addTaskAC, changeStatusAC, removeTaskAC, tasksReducer, updateTitleTaskAC} from "./taskReducer";
+import {addTaskAC, removeTaskAC, TaskObjetType, tasksReducer, updateTaskAC} from "./taskReducer";
+import {TaskPriorities, TaskStatuses} from "../../api/todos-api";
 
-test('should be REMOVE-TODOLIST', () => {
-    let todolistID1 = v1();
-    let todolistID2 = v1();
-    let taskid = v1()
-    let tasksState = {
-        [todolistID1]: [
-            {id: taskid, title: "HTML&CSS", isDone: true},
-            {id: v1(), title: "JS", isDone: true},
-            {id: v1(), title: "ReactJS", isDone: false},
-            {id: v1(), title: "Rest API", isDone: false},
-            {id: v1(), title: "GraphQL", isDone: false},
+
+let startState: TaskObjetType = {}
+beforeEach(() => {
+    startState = {
+        ["todolistID1"]: [
+            {
+            id: '1',
+            title: "HTML&CSS",
+            status: TaskStatuses.New,
+            todoListId: 'todolistID1',
+            description: '',
+            startDate: '',
+            deadline: '',
+            addedDate: '',
+            order: 0,
+            priority: TaskPriorities.Low
+        },
+            {
+                id: '2',
+                title: "JS",
+                status: TaskStatuses.New,
+                todoListId: 'todolistID1',
+                description: '',
+                startDate: '',
+                deadline: '',
+                addedDate: '',
+                order: 0,
+                priority: TaskPriorities.Low
+            },
+            {
+                id: '3',
+                title: "ReactJS",
+                status: TaskStatuses.New,
+                todoListId: 'todolistID1',
+                description: '',
+                startDate: '',
+                deadline: '',
+                addedDate: '',
+                order: 0,
+                priority: TaskPriorities.Low
+            },
+            {
+                id: '4',
+                title: "Rest API",
+                status: TaskStatuses.New,
+                todoListId: 'todolistID1',
+                description: '',
+                startDate: '',
+                deadline: '',
+                addedDate: '',
+                order: 0,
+                priority: TaskPriorities.Low
+            },
+            {
+                id: '5',
+                title: "GraphQL",
+                status: TaskStatuses.New,
+                todoListId: 'todolistID1',
+                description: '',
+                startDate: '',
+                deadline: '',
+                addedDate: '',
+                order: 0,
+                priority: TaskPriorities.Low
+            },
         ],
-        [todolistID2]: [
-            {id: v1(), title: "HTML&CSS2", isDone: true},
-            {id: v1(), title: "JS2", isDone: true},
-            {id: v1(), title: "ReactJS2", isDone: false},
-            {id: v1(), title: "Rest API2", isDone: false},
-            {id: v1(), title: "GraphQL2", isDone: false},
+        ["todolistID2"]: [
+            {
+                id: '1',
+                title: "HTML&CSS2",
+                status: TaskStatuses.Completed,
+                todoListId: 'todolistID2',
+                description: '',
+                startDate: '',
+                deadline: '',
+                addedDate: '',
+                order: 0,
+                priority: TaskPriorities.Low
+            },
+            {
+                id: '2',
+                title: "JS2",
+                status: TaskStatuses.New,
+                todoListId: 'todolistID2',
+                description: '',
+                startDate: '',
+                deadline: '',
+                addedDate: '',
+                order: 0,
+                priority: TaskPriorities.Low
+            },
+            {
+                id: '3',
+                title: "ReactJS2",
+                status: TaskStatuses.New,
+                todoListId: 'todolistID2',
+                description: '',
+                startDate: '',
+                deadline: '',
+                addedDate: '',
+                order: 0,
+                priority: TaskPriorities.Low
+            },
+            {
+                id: '4',
+                title: "Rest API2",
+                status: TaskStatuses.New,
+                todoListId: 'todolistID2',
+                description: '',
+                startDate: '',
+                deadline: '',
+                addedDate: '',
+                order: 0,
+                priority: TaskPriorities.Low
+            },
+            {
+                id: '5',
+                title: "GraphQL2",
+                status: TaskStatuses.New,
+                todoListId: 'todolistID2',
+                description: '',
+                startDate: '',
+                deadline: '',
+                addedDate: '',
+                order: 0,
+                priority: TaskPriorities.Low
+            },
         ]
     }
+})
 
-    const endState = tasksReducer(tasksState, removeTaskAC(todolistID1, taskid))
-
-    expect(endState[todolistID1].length).toBe(4);
-    expect(endState[todolistID2].length).toBe(5);
+test('should be REMOVE-TASK', () => {
+    const endState = tasksReducer(startState, removeTaskAC("todolistID1",'1'))
+    expect(endState["todolistID1"].length).toBe(4);
+    expect(endState["todolistID2"].length).toBe(5);
 });
 test('should be CHANGE-STATUS', () => {
-    let todolistID1 = v1();
-    let todolistID2 = v1();
-    let taskid = v1()
+   let task = {...startState["todolistID1"][1], status: TaskStatuses.Completed}
+    const endState = tasksReducer(startState, updateTaskAC(task))
 
-    let tasksState: TaskObjetType = {
-        [todolistID1]: [
-            {id: taskid, title: "HTML&CSS", isDone: true},
-            {id: v1(), title: "JS", isDone: true},
-            {id: v1(), title: "ReactJS", isDone: false},
-            {id: v1(), title: "Rest API", isDone: false},
-            {id: v1(), title: "GraphQL", isDone: false},
-        ],
-        [todolistID2]: [
-            {id: v1(), title: "HTML&CSS2", isDone: true},
-            {id: v1(), title: "JS2", isDone: true},
-            {id: v1(), title: "ReactJS2", isDone: false},
-            {id: v1(), title: "Rest API2", isDone: false},
-            {id: v1(), title: "GraphQL2", isDone: false},
-        ]
-    }
-
-    const endState = tasksReducer(tasksState, changeStatusAC(todolistID1, taskid, false))
-
-    expect(endState[todolistID1][0].isDone).toBe(false);
-    expect(endState[todolistID1][1].isDone).toBe(true);
-    expect(endState[todolistID1].length).toBe(5);
-    expect(endState[todolistID2].length).toBe(5);
+    expect(endState["todolistID1"][0].status).toBe(TaskStatuses.New);
+    expect(endState["todolistID1"][1].status).toBe(TaskStatuses.Completed);
+    expect(endState["todolistID1"].length).toBe(5);
+    expect(endState["todolistID2"].length).toBe(5);
 });
 test('should be addTask', () => {
-    let todolistID1 = v1();
-    let todolistID2 = v1();
-    let taskid = v1()
+    let task = {...startState["todolistID2"][0], title: 'React_2.0'}
+    const endState = tasksReducer(startState, addTaskAC(task))
 
-    let tasksState: TaskObjetType = {
-        [todolistID1]: [
-            {id: taskid, title: "HTML&CSS", isDone: true},
-            {id: v1(), title: "JS", isDone: true},
-            {id: v1(), title: "ReactJS", isDone: false},
-            {id: v1(), title: "Rest API", isDone: false},
-            {id: v1(), title: "GraphQL", isDone: false},
-        ],
-        [todolistID2]: [
-            {id: v1(), title: "HTML&CSS2", isDone: true},
-            {id: v1(), title: "JS2", isDone: true},
-            {id: v1(), title: "ReactJS2", isDone: false},
-            {id: v1(), title: "Rest API2", isDone: false},
-            {id: v1(), title: "GraphQL2", isDone: false},
-        ]
-    }
-
-    const endState = tasksReducer(tasksState, addTaskAC(todolistID1, 'React_2.0'))
-
-    expect(endState[todolistID1][0].title).toBe('React_2.0');
-    expect(endState[todolistID1].length).toBe(6);
-    expect(endState[todolistID2].length).toBe(5);
+    expect(endState["todolistID2"][0].title).toBe('React_2.0');
+    expect(endState["todolistID2"].length).toBe(6);
+    expect(endState["todolistID1"].length).toBe(5);
 });
 test('should be addEmptyTask', () => {
-    let todolistID1 = v1();
-    let todolistID2 = v1();
-    let taskid = v1()
+    let task = {...startState["todolistID2"][2], title: 'React_2.0'}
+    const endState = tasksReducer(startState, updateTaskAC(task))
 
-    let tasksState: TaskObjetType = {
-        [todolistID1]: [
-            {id: taskid, title: "HTML&CSS", isDone: true},
-            {id: v1(), title: "JS", isDone: true},
-            {id: v1(), title: "ReactJS", isDone: false},
-            {id: v1(), title: "Rest API", isDone: false},
-            {id: v1(), title: "GraphQL", isDone: false},
-        ],
-        [todolistID2]: [
-            {id: v1(), title: "HTML&CSS2", isDone: true},
-            {id: v1(), title: "JS2", isDone: true},
-            {id: v1(), title: "ReactJS2", isDone: false},
-            {id: v1(), title: "Rest API2", isDone: false},
-            {id: v1(), title: "GraphQL2", isDone: false},
-        ]
-    }
-
-    const endState = tasksReducer(tasksState, updateTitleTaskAC(todolistID1, taskid, 'MUI'))
-
-    expect(endState[todolistID1][0].title).toBe('MUI');
-    expect(endState[todolistID1].length).toBe(5);
-    expect(endState[todolistID2].length).toBe(5);
-});
-test('should be UPDATE-TITLE', () => {
-    let todolistID1 = v1();
-    let todolistID2 = v1();
-    let taskid = v1()
-
-    let tasksState: TaskObjetType = {
-        [todolistID1]: [
-            {id: taskid, title: "HTML&CSS", isDone: true},
-            {id: v1(), title: "JS", isDone: true},
-            {id: v1(), title: "ReactJS", isDone: false},
-            {id: v1(), title: "Rest API", isDone: false},
-            {id: v1(), title: "GraphQL", isDone: false},
-        ],
-        [todolistID2]: [
-            {id: v1(), title: "HTML&CSS2", isDone: true},
-            {id: v1(), title: "JS2", isDone: true},
-            {id: v1(), title: "ReactJS2", isDone: false},
-            {id: v1(), title: "Rest API2", isDone: false},
-            {id: v1(), title: "GraphQL2", isDone: false},
-        ]
-    }
-
-    const endState = tasksReducer(tasksState, updateTitleTaskAC(todolistID1, taskid, 'MUI'))
-
-    expect(endState[todolistID1][0].title).toBe('MUI');
-    expect(endState[todolistID1].length).toBe(5);
-    expect(endState[todolistID2].length).toBe(5);
+    expect(endState["todolistID2"][2].title).toBe('React_2.0');
+    expect(endState["todolistID2"][0].title).toBe('HTML&CSS2');
+    expect(endState["todolistID2"].length).toBe(5);
+    expect(endState["todolistID1"].length).toBe(5);
 });

@@ -1,6 +1,6 @@
 import React, {useCallback} from 'react';
 import './ControlButtons.css'
-import {FilterValuesType} from "../../App";
+import {FilterValuesType} from "../../app/App";
 import {Button} from "@material-ui/core";
 
 

@@ -7,7 +7,6 @@ type ToDoListHeaderPropsType = {
 }
 
 const ToDoListHeader = React.memo((props: ToDoListHeaderPropsType) => {
-    console.log('ToDoListHeader')
     const updateToDoList = useCallback((title:string) => {
         props.updateToDoList(title)
     }, [props.updateToDoList])

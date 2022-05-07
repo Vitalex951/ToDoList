@@ -7,7 +7,6 @@ type AddTaskFormPropsType = {
 }
 
 export const AddTaskFormWithRedux = React.memo((props: AddTaskFormPropsType) => {
-    console.log('AddTaskFormWithRedux')
     const [title, setTitle] = useState<string>('')
     const [error, setError] = useState<string | ''>('')
 
