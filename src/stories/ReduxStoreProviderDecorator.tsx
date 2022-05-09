@@ -1,6 +1,6 @@
 import React from "react";
 import {Provider} from "react-redux";
-import {AppRootStateType} from "../Components/state/store";
+import {AppRootStateType} from "../Components/store/store";
 import {Story} from "@storybook/react";
 import {combineReducers, createStore} from "redux";
 import {tasksReducer} from "../Components/reducer/taskReducer";

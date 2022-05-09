@@ -3,7 +3,7 @@ import './App.css';
 import {AppBar, Box, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@material-ui/core";
 import {Menu} from "@material-ui/icons";
 import {useDispatch, useSelector} from "react-redux";
-import {AppRootStateType} from "../Components/state/store";
+import {AppRootStateType} from "../Components/store/store";
 import {addTodoListTS, fetchTodosTS, TodolistDomainType} from "../Components/reducer/todolistReducer";
 import {TodoListWithRedux} from "../Components/TodoList/TodoListWithRedux";
 import {AddTaskForm} from "../Components/trash/AddTaskForm";

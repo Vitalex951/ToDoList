@@ -5,7 +5,7 @@ import {ControlButtons} from "../ControlButtons/ControlButtons";
 import {Delete} from "@material-ui/icons";
 import {IconButton} from "@material-ui/core";
 import {useDispatch, useSelector} from "react-redux";
-import {AppRootStateType} from "../state/store";
+import {AppRootStateType} from "../store/store";
 import {changeFilterAC, removeTodoListTS, updateTitleTodoListTS} from "../reducer/todolistReducer";
 import {TaskListWithRedux} from "../TaskList/TaskListWithRedux";
 import {AddTaskFormWithRedux} from "../AddTaskForm/AddTaskFormWithReducer";

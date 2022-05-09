@@ -3,7 +3,7 @@ import {ComponentMeta, ComponentStory} from '@storybook/react';
 import {TaskWithRedux} from "../Components/Task/TaskWithRedux";
 import {ReduxStoreProviderDecorator} from "./ReduxStoreProviderDecorator";
 import {useSelector} from "react-redux";
-import {AppRootStateType} from "../Components/state/store";
+import {AppRootStateType} from "../Components/store/store";
 import {TaskType} from "../api/todos-api";
 
 

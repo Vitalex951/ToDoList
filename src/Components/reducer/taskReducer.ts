@@ -1,29 +1,11 @@
-import {Dispatch} from "redux";
 import {TaskType, todolistsAPI, UpdateTaskModelType} from "../../api/todos-api";
 import {addTodoListACType, removeTodoListACType, setTodosActionType} from "./todolistReducer";
-
-//types
-export type TaskObjetType = {
-    [key: string]: Array<TaskType>
-}
-type taskReducerType =
-    removeTaskACType
-    | addTaskACType
-    | updateTitleTaskACType
-    | addTodoListACType
-    | removeTodoListACType
-    | setTodosActionType
-    | setTasksACType
-
-type removeTaskACType = ReturnType<typeof removeTaskAC>
-type addTaskACType = ReturnType<typeof addTaskAC>
-type updateTitleTaskACType = ReturnType<typeof updateTaskAC>
-type setTasksACType = ReturnType<typeof setTasksAC>
+import {ThunkType} from "../store/store";
 
 
 //reducer
 const initialState: TaskObjetType = {}
-export const tasksReducer = (state: TaskObjetType = initialState, action: taskReducerType): TaskObjetType => {
+export const tasksReducer = (state: TaskObjetType = initialState, action: TaskReducerType): TaskObjetType => {
     switch (action.type) {
         case "REMOVE-TASK":
             return {
@@ -98,68 +80,52 @@ export const setTasksAC = (todolistID: string, tasks: TaskType[]) => {
 
 
 //Thunks
-export const fetchTasksTC = (todolistID: string) => {
-    return (dispatch: Dispatch) => {
-        todolistsAPI.getTasks(todolistID).then(res => {
-                dispatch(setTasksAC(todolistID, res.data.items))
-            }
-        )
-    }
+export const fetchTasksTC = (todolistID: string): ThunkType => async (dispatch) => {
+    const res = await todolistsAPI.getTasks(todolistID)
+    dispatch(setTasksAC(todolistID, res.data.items))
 }
-export const removeTaskTC = (todoListID: string, id: string) => {
-    return (dispatch: Dispatch) => {
-        todolistsAPI.deleteTask(todoListID, id)
-            .then(res => {
-                dispatch(removeTaskAC(todoListID, id))
-            })
-    }
+export const removeTaskTC = (todoListID: string, id: string): ThunkType => async (dispatch) => {
+    const res = await todolistsAPI.deleteTask(todoListID, id)
+    dispatch(removeTaskAC(todoListID, id))
 }
-export const addTaskTC = (todoListID: string, title: string) => {
-    return (dispatch: Dispatch) => {
-        todolistsAPI.createTask(todoListID, title)
-            .then(res => {
-                const newTask = res.data.data.item
-                dispatch(addTaskAC(newTask))
-            })
-    }
+export const addTaskTC = (todoListID: string, title: string): ThunkType => async (dispatch) => {
+    const res = await todolistsAPI.createTask(todoListID, title)
+    const newTask = res.data.data.item
+    dispatch(addTaskAC(newTask))
+
 }
-export const updateTaskStatusTC = (task: TaskType) => {
-    return (dispatch: Dispatch) => {
-        const model: UpdateTaskModelType = {
-            title: task.title,
-            description: task.description,
-            status: task.status,
-            priority: task.priority,
-            startDate: task.startDate,
-            deadline: task.deadline
-        }
-        todolistsAPI.updateTask(task.todoListId, task.id, model)
-            .then(res => {
-                dispatch(updateTaskAC(res.data.data.item))
-            })
+export const updateTaskStatusTC = (task: TaskType): ThunkType => async (dispatch) => {
+    const model: UpdateTaskModelType = {
+        title: task.title,
+        description: task.description,
+        status: task.status,
+        priority: task.priority,
+        startDate: task.startDate,
+        deadline: task.deadline
     }
+    const res = await todolistsAPI.updateTask(task.todoListId, task.id, model)
+    dispatch(updateTaskAC(res.data.data.item))
 }
-export const updateTaskTitleTC = (task: TaskType) => {
-    return (dispatch: Dispatch) => {
-        const model: UpdateTaskModelType = {
-            title: task.title,
-            description: task.description,
-            status: task.status,
-            priority: task.priority,
-            startDate: task.startDate,
-            deadline: task.deadline
-        }
-        todolistsAPI.updateTask(task.todoListId, task.id, model)
-            .then(res => {
-                dispatch(updateTaskAC(res.data.data.item))
-            })
+
+export const updateTaskTitleTC = (task: TaskType): ThunkType => async (dispatch) => {
+    const model: UpdateTaskModelType = {
+        title: task.title,
+        description: task.description,
+        status: task.status,
+        priority: task.priority,
+        startDate: task.startDate,
+        deadline: task.deadline
     }
+    const res = await todolistsAPI.updateTask(task.todoListId, task.id, model)
+    dispatch(updateTaskAC(res.data.data.item))
 }
-//get state
+
+
+//get store
 // export const updateTaskStatusTC = (task: TaskType) => {
 //     return (dispatch: Dispatch, getState: () => AppRootStateType) => {
-//         const state = getState()
-//         const allAppTasks = state.tasks
+//         const store = getState()
+//         const allAppTasks = store.tasks
 //         const tasksForClickedTodo = allAppTasks[todoListID]
 //         const currentTask = tasksForClickedTodo.find(t => t.taskID === taskID)
 //
@@ -169,3 +135,23 @@ export const updateTaskTitleTC = (task: TaskType) => {
 //             })
 //     }
 // }
+
+
+//types
+export type TaskObjetType = {
+    [key: string]: Array<TaskType>
+}
+
+export type TaskReducerType =
+    removeTaskACType
+    | addTaskACType
+    | updateTitleTaskACType
+    | addTodoListACType
+    | removeTodoListACType
+    | setTodosActionType
+    | setTasksACType
+
+type removeTaskACType = ReturnType<typeof removeTaskAC>
+type addTaskACType = ReturnType<typeof addTaskAC>
+type updateTitleTaskACType = ReturnType<typeof updateTaskAC>
+type setTasksACType = ReturnType<typeof setTasksAC>
