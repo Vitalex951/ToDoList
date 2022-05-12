@@ -1,7 +1,7 @@
-import {v1} from "uuid";
 import {
     addTodoListAC,
     changeFilterAC,
+    changeTodoListEnityStatusAC,
     removeTodoListAC,
     TodolistDomainType,
     todoListReducer,
@@ -11,8 +11,8 @@ import {
 let startState: TodolistDomainType[] = []
 beforeEach(() => {
     startState = [
-        {id: "todolistID1", title: 'What to learn', addedDate: '', order: 3, filter: 'all'},
-        {id: "todolistID2", title: 'What to buy', addedDate: '', order: 3, filter: 'all'},
+        {id: "todolistID1", title: 'What to learn', addedDate: '', order: 3, filter: 'all', entityStatus: "succeeded"},
+        {id: "todolistID2", title: 'What to buy', addedDate: '', order: 3, filter: 'all', entityStatus: "succeeded"},
     ]
 
 })
@@ -43,4 +43,12 @@ test('correct todolist should be UPDATE-TODOLIST', () => {
 
     expect(endState.length).toBe(2)
     expect(endState[0].title).toBe('What to remove')
+});
+
+test('change status in todolist', () => {
+    const endState = todoListReducer(startState, changeTodoListEnityStatusAC("todolistID2", "loading"))
+
+    expect(endState.length).toBe(2)
+    expect(endState[1].entityStatus).toBe('loading')
+    expect(endState[0].entityStatus).toBe('succeeded')
 });

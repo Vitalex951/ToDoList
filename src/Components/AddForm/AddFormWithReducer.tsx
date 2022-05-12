@@ -4,6 +4,7 @@ import {AddBox} from "@material-ui/icons";
 
 type AddTaskFormPropsType = {
     callback: (title: string) => void
+    disabled?: boolean
 }
 
 export const AddTaskFormWithRedux = React.memo((props: AddTaskFormPropsType) => {
@@ -39,9 +40,10 @@ export const AddTaskFormWithRedux = React.memo((props: AddTaskFormPropsType) => 
                        variant="standard"
                        error={!!error}
                        helperText={error}
+                       disabled={props.disabled}
                 // autoComplete='off'
             />
-            <IconButton onClick={onClickAddTask} size={"small"}>
+            <IconButton onClick={onClickAddTask} size={"small"} disabled={props.disabled}>
                 <AddBox/>
             </IconButton>
         </div>

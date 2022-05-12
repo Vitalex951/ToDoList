@@ -16,7 +16,7 @@ import {
     updateToDoListAC
 } from "../Components/reducer/todolistReducer";
 import {AddTaskForm} from "../Components/trash/AddTaskForm";
-import {TaskPriorities, TaskStatuses, TaskType} from "../api/todos-api";
+import {TaskPriorities, TaskStatuses} from "../api/todos-api";
 import TodoList from "../Components/trash/TodoList";
 
 export type FilterValuesType = 'all' | 'active' | 'completed'
@@ -24,8 +24,8 @@ export type FilterValuesType = 'all' | 'active' | 'completed'
 function App() {
 
     let [todolists, todolistsDispatch] = useReducer(todoListReducer, [
-        {id: "todolistID1", title: 'What to learn', addedDate: '', order: 3, filter: 'all'},
-        {id: "todolistID2", title: 'What to buy', addedDate: '', order: 3, filter: 'all'},
+        {id: "todolistID1", title: 'What to learn', addedDate: '', order: 3, filter: 'all', entityStatus: "succeeded"},
+        {id: "todolistID2", title: 'What to buy', addedDate: '', order: 3, filter: 'all', entityStatus: "succeeded"},
     ])
 
     let [tasks, tasksDispatch] = useReducer(tasksReducer, {

@@ -1,6 +1,7 @@
 import {TaskType, todolistsAPI, UpdateTaskModelType} from "../../api/todos-api";
-import {addTodoListACType, removeTodoListACType, setTodosActionType} from "./todolistReducer";
+import {addTodoListACType, removeTodoListACType, setTodosACType} from "./todolistReducer";
 import {ThunkType} from "../store/store";
+import {setAppErrorsAC, setAppStatusAC} from "./app-reducer";
 
 
 //reducer
@@ -81,20 +82,48 @@ export const setTasksAC = (todolistID: string, tasks: TaskType[]) => {
 
 //Thunks
 export const fetchTasksTC = (todolistID: string): ThunkType => async (dispatch) => {
+    dispatch(setAppStatusAC("loading"))
     const res = await todolistsAPI.getTasks(todolistID)
     dispatch(setTasksAC(todolistID, res.data.items))
+    dispatch(setAppStatusAC("succeeded"))
 }
 export const removeTaskTC = (todoListID: string, id: string): ThunkType => async (dispatch) => {
+    dispatch(setAppStatusAC("loading"))
     const res = await todolistsAPI.deleteTask(todoListID, id)
     dispatch(removeTaskAC(todoListID, id))
+    dispatch(setAppStatusAC("succeeded"))
+}
+
+// add enum
+enum ResultCodeStatuses {
+    'success',
+    'error',
+    'captcha'
 }
 export const addTaskTC = (todoListID: string, title: string): ThunkType => async (dispatch) => {
-    const res = await todolistsAPI.createTask(todoListID, title)
-    const newTask = res.data.data.item
-    dispatch(addTaskAC(newTask))
+    try {
+        dispatch(setAppStatusAC("loading"))
+        const res = await todolistsAPI.createTask(todoListID, title)
+        if (res.data.resultCode === ResultCodeStatuses.error) {
+            dispatch(setAppErrorsAC(res.data.messages[0]))
+            dispatch(setAppStatusAC("succeeded"))
 
+        } else {
+            const newTask = res.data.data.item
+            dispatch(addTaskAC(newTask))
+            dispatch(setAppStatusAC("succeeded"))
+
+        }
+
+    } catch (error) {
+        if (error instanceof Error) {
+            dispatch(setAppErrorsAC(error.name))
+            dispatch(setAppStatusAC("succeeded"))
+        }
+    }
 }
 export const updateTaskStatusTC = (task: TaskType): ThunkType => async (dispatch) => {
+    dispatch(setAppStatusAC("loading"))
     const model: UpdateTaskModelType = {
         title: task.title,
         description: task.description,
@@ -105,9 +134,10 @@ export const updateTaskStatusTC = (task: TaskType): ThunkType => async (dispatch
     }
     const res = await todolistsAPI.updateTask(task.todoListId, task.id, model)
     dispatch(updateTaskAC(res.data.data.item))
+    dispatch(setAppStatusAC("succeeded"))
 }
-
 export const updateTaskTitleTC = (task: TaskType): ThunkType => async (dispatch) => {
+    dispatch(setAppStatusAC("loading"))
     const model: UpdateTaskModelType = {
         title: task.title,
         description: task.description,
@@ -118,9 +148,8 @@ export const updateTaskTitleTC = (task: TaskType): ThunkType => async (dispatch)
     }
     const res = await todolistsAPI.updateTask(task.todoListId, task.id, model)
     dispatch(updateTaskAC(res.data.data.item))
+    dispatch(setAppStatusAC("succeeded"))
 }
-
-
 //get store
 // export const updateTaskStatusTC = (task: TaskType) => {
 //     return (dispatch: Dispatch, getState: () => AppRootStateType) => {
@@ -148,10 +177,11 @@ export type TaskReducerType =
     | updateTitleTaskACType
     | addTodoListACType
     | removeTodoListACType
-    | setTodosActionType
+    | setTodosACType
     | setTasksACType
 
 type removeTaskACType = ReturnType<typeof removeTaskAC>
 type addTaskACType = ReturnType<typeof addTaskAC>
 type updateTitleTaskACType = ReturnType<typeof updateTaskAC>
 type setTasksACType = ReturnType<typeof setTasksAC>
+

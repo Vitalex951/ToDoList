@@ -21,7 +21,9 @@ export const AddTaskForm = React.memo((props: AddTaskFormPropsType) => {
             setTitle('')
             setError('')
         } else {
+            // dispatch(setAppErrorsAC('Title is maximum length of 100 '))
             setError('Title is required')
+            setTitle('')
         }
     }, [title])
     const onKeyPressHandler = useCallback((e: KeyboardEvent<HTMLInputElement>) => {
@@ -31,7 +33,7 @@ export const AddTaskForm = React.memo((props: AddTaskFormPropsType) => {
     }, [])
 
 
-    let classError = (error ? 'input-add error' : 'input-add')
+    // let classError = (error ? 'input-add error' : 'input-add')
     return (
         <div>
             <TextField value={title}

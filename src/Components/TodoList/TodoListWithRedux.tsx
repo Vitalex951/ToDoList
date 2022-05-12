@@ -8,14 +8,16 @@ import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../store/store";
 import {changeFilterAC, removeTodoListTS, updateTitleTodoListTS} from "../reducer/todolistReducer";
 import {TaskListWithRedux} from "../TaskList/TaskListWithRedux";
-import {AddTaskFormWithRedux} from "../AddTaskForm/AddTaskFormWithReducer";
+import {AddTaskFormWithRedux} from "../AddForm/AddFormWithReducer";
 import {addTaskTC, fetchTasksTC} from "../reducer/taskReducer";
 import {TaskStatuses, TaskType} from "../../api/todos-api";
+import {RequestStatusType} from "../reducer/app-reducer";
 
 type TodoListPropsType = {
     todoListID: string
     todolistFilter: FilterValuesType
     todolistTitle: string
+    entityStatus: RequestStatusType
 }
 
 export const TodoListWithRedux = React.memo((props: TodoListPropsType) => {
@@ -54,7 +56,7 @@ export const TodoListWithRedux = React.memo((props: TodoListPropsType) => {
         <div className='container'>
             <div className='header_div'>
                 <div className='button_deleted_toDolist'>
-                    <IconButton onClick={removeToDoList} size={"small"}>
+                    <IconButton onClick={removeToDoList} size={"small"} disabled={props.entityStatus === 'loading'}>
                         <Delete/>
                     </IconButton>
                     {/*<ButtonMy*/}
@@ -67,7 +69,9 @@ export const TodoListWithRedux = React.memo((props: TodoListPropsType) => {
                     updateToDoList={updateToDoList}/>
             </div>
             <div className='add_task'>
-                <AddTaskFormWithRedux callback={addTask}/>
+                <AddTaskFormWithRedux
+                    callback={addTask}
+                    disabled={props.entityStatus === "loading"}/>
             </div>
             <div className='main'>
                 <TaskListWithRedux
