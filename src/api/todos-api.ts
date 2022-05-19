@@ -33,8 +33,21 @@ export const todolistsAPI = {
         return instance.post<ResponseType<{ item: TaskType }>>(`todo-lists/${todolistId}/tasks`, {title})
     },
     updateTask(todolistId: string, taskId: string, model: UpdateTaskModelType) {
-       return  instance.put<ResponseType<{item: TaskType}>>(`todo-lists/${todolistId}/tasks/${taskId}`, model)
+        return instance.put<ResponseType<{ item: TaskType }>>(`todo-lists/${todolistId}/tasks/${taskId}`, model)
     }
+}
+
+export const authAPI = {
+    login(data: LoginParamsType) {
+        return instance.post<ResponseType<{ userId: number }>>('auth/login', data)
+    },
+    me(){
+        return instance.get<ResponseType<MeResponseType>>('auth/me')
+    },
+    logout(){
+        return instance.delete<ResponseType>('auth/login')
+    }
+
 }
 
 
@@ -46,6 +59,7 @@ export enum TaskStatuses {
     Completed = 2,
     Draft = 3
 }
+
 export enum TaskPriorities {
     Low = 0,
     Middle = 1,
@@ -53,6 +67,7 @@ export enum TaskPriorities {
     Urgently = 3,
     Later = 4
 }
+
 export type TaskType = {
     description: string
     title: string
@@ -90,6 +105,19 @@ export type ResponseType<T = {}> = {
     resultCode: number
     messages: string[]
     data: T
+}
+
+//auth Type
+export type LoginParamsType = {
+    email: string
+    password: string
+    rememberMe?: boolean
+    captcha?: string
+}
+export type MeResponseType = {
+    id: number
+    email: string
+    login: string
 }
 
 

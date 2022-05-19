@@ -153,7 +153,11 @@ const initialGlobalState: AppRootStateType = {
         {id: "todolistID2", title: 'What to buy', addedDate: '', order: 3, filter: 'all', entityStatus: "succeeded"},],
     app: {
         status: 'loading',
-        error: 'error-super'
+        error: 'error-super',
+        isInitialized: false
+    },
+    auth: {
+        isLoggedIn: false
     }
 
 };

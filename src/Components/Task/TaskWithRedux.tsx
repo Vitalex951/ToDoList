@@ -36,7 +36,6 @@ export const TaskWithRedux = React.memo((props: TaskPropsType) => {
     return (
         <div className='task'>
             <li>
-                <label className="checkbox-other">
                     <div className='labelcontainer'>
 
                         <Checkbox onChange={inputChangeStatus} checked={props.status === TaskStatuses.Completed}/>
@@ -49,8 +48,6 @@ export const TaskWithRedux = React.memo((props: TaskPropsType) => {
                         </IconButton>
 
                     </div>
-                </label>
-
             </li>
         </div>
     );

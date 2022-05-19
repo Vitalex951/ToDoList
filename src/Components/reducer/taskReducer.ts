@@ -2,6 +2,7 @@ import {TaskType, todolistsAPI, UpdateTaskModelType} from "../../api/todos-api";
 import {addTodoListACType, removeTodoListACType, setTodosACType} from "./todolistReducer";
 import {ThunkType} from "../store/store";
 import {setAppErrorsAC, setAppStatusAC} from "./app-reducer";
+import {handlerServerNetworkError} from "../utils/error-utils";
 
 
 //reducer
@@ -83,23 +84,31 @@ export const setTasksAC = (todolistID: string, tasks: TaskType[]) => {
 //Thunks
 export const fetchTasksTC = (todolistID: string): ThunkType => async (dispatch) => {
     dispatch(setAppStatusAC("loading"))
-    const res = await todolistsAPI.getTasks(todolistID)
-    dispatch(setTasksAC(todolistID, res.data.items))
-    dispatch(setAppStatusAC("succeeded"))
+    todolistsAPI.getTasks(todolistID)
+        .then(res => {
+            dispatch(setTasksAC(todolistID, res.data.items))
+            dispatch(setAppStatusAC("succeeded"))
+        })
 }
 export const removeTaskTC = (todoListID: string, id: string): ThunkType => async (dispatch) => {
     dispatch(setAppStatusAC("loading"))
-    const res = await todolistsAPI.deleteTask(todoListID, id)
-    dispatch(removeTaskAC(todoListID, id))
-    dispatch(setAppStatusAC("succeeded"))
+    todolistsAPI.deleteTask(todoListID, id)
+        .then(res => {
+            dispatch(removeTaskAC(todoListID, id))
+            dispatch(setAppStatusAC("succeeded"))
+        })
+        .catch(err => {
+            handlerServerNetworkError(dispatch, err.message)
+        })
 }
 
-// add enum
+// add enum + try-catch
 enum ResultCodeStatuses {
     'success',
     'error',
     'captcha'
 }
+
 export const addTaskTC = (todoListID: string, title: string): ThunkType => async (dispatch) => {
     try {
         dispatch(setAppStatusAC("loading"))
@@ -122,7 +131,7 @@ export const addTaskTC = (todoListID: string, title: string): ThunkType => async
         }
     }
 }
-export const updateTaskStatusTC = (task: TaskType): ThunkType => async (dispatch) => {
+export const updateTaskStatusTC = (task: TaskType): ThunkType => (dispatch) => {
     dispatch(setAppStatusAC("loading"))
     const model: UpdateTaskModelType = {
         title: task.title,
@@ -132,11 +141,16 @@ export const updateTaskStatusTC = (task: TaskType): ThunkType => async (dispatch
         startDate: task.startDate,
         deadline: task.deadline
     }
-    const res = await todolistsAPI.updateTask(task.todoListId, task.id, model)
-    dispatch(updateTaskAC(res.data.data.item))
-    dispatch(setAppStatusAC("succeeded"))
+    todolistsAPI.updateTask(task.todoListId, task.id, model)
+        .then(res => {
+            dispatch(updateTaskAC(res.data.data.item))
+            dispatch(setAppStatusAC("succeeded"))
+        })
+        .catch(err => {
+            handlerServerNetworkError(dispatch, err.message)
+        })
 }
-export const updateTaskTitleTC = (task: TaskType): ThunkType => async (dispatch) => {
+export const updateTaskTitleTC = (task: TaskType): ThunkType => (dispatch) => {
     dispatch(setAppStatusAC("loading"))
     const model: UpdateTaskModelType = {
         title: task.title,
@@ -146,9 +160,14 @@ export const updateTaskTitleTC = (task: TaskType): ThunkType => async (dispatch)
         startDate: task.startDate,
         deadline: task.deadline
     }
-    const res = await todolistsAPI.updateTask(task.todoListId, task.id, model)
-    dispatch(updateTaskAC(res.data.data.item))
-    dispatch(setAppStatusAC("succeeded"))
+    todolistsAPI.updateTask(task.todoListId, task.id, model)
+        .then(res => {
+            dispatch(updateTaskAC(res.data.data.item))
+            dispatch(setAppStatusAC("succeeded"))
+        })
+        .catch(err => {
+            handlerServerNetworkError(dispatch, err.message)
+        })
 }
 //get store
 // export const updateTaskStatusTC = (task: TaskType) => {

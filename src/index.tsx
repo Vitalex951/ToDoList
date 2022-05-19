@@ -5,10 +5,13 @@ import * as serviceWorker from './serviceWorker';
 import {AppWithRedux} from "./app/AppWithRedux";
 import {Provider} from "react-redux";
 import {store} from "./Components/store/store";
+import {BrowserRouter} from "react-router-dom";
 
 ReactDOM.render(
     <Provider store={store}>
-        <AppWithRedux/>
+        <BrowserRouter>
+            <AppWithRedux/>
+        </BrowserRouter>
     </Provider>
     , document.getElementById('root'));
 serviceWorker.unregister();

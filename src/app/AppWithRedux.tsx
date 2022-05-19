@@ -1,39 +1,39 @@
-import React, {useCallback, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import './App.css';
-import {
-    AppBar,
-    Box,
-    Button,
-    Container,
-    Grid,
-    IconButton,
-    Paper,
-    Toolbar,
-    Typography
-} from "@material-ui/core";
+import {AppBar, Box, Button, Container, Grid, IconButton, Toolbar, Typography} from "@material-ui/core";
 import {Menu} from "@material-ui/icons";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../Components/store/store";
-import {addTodoListTS, fetchTodosTS, TodolistDomainType} from "../Components/reducer/todolistReducer";
-import {TodoListWithRedux} from "../Components/TodoList/TodoListWithRedux";
-import {AddTaskForm} from "../Components/trash/AddTaskForm";
 import LinearProgress from "@material-ui/core/LinearProgress";
-import {RequestStatusType} from "../Components/reducer/app-reducer";
+import {initializeAppTC, RequestStatusType} from "../Components/reducer/app-reducer";
 import {ErrorSnackbar} from "../Components/snacbar/ErrorSnackbar";
+import {Login} from "../Components/Login/Login";
+import {Navigate, Route, Routes} from "react-router-dom";
+import {ToDoListContainer} from "../Components/TodoList/ToDoListContainer";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import {logOutTC} from "../Components/reducer/auth-reducer";
 
 
 export const AppWithRedux = React.memo(() => {
-    useEffect(() => {
-        dispatch(fetchTodosTS())
-    }, [])
-    const status = useSelector<AppRootStateType, RequestStatusType>(state => state.app.status)
-
-    const todolists = useSelector<AppRootStateType, Array<TodolistDomainType>>(state => state.todoLists)
     const dispatch = useDispatch()
-
-    const addTodoList = useCallback((title: string) => {
-        dispatch(addTodoListTS(title))
+    const status = useSelector<AppRootStateType, RequestStatusType>(state => state.app.status)
+    const isInitialized = useSelector<AppRootStateType, boolean>(state => state.app.isInitialized)
+    const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
+    useEffect(() => {
+        dispatch(initializeAppTC())
     }, [])
+
+    const setLogout = () => {
+        dispatch(logOutTC())
+    }
+
+    if (!isInitialized) {
+        return <div
+            style={{position: 'fixed', top: '30%', textAlign: 'center', width: '100%'}}>
+            <CircularProgress/>
+        </div>
+    }
+
 
     return (
         <div className='App'>
@@ -51,6 +51,7 @@ export const AppWithRedux = React.memo(() => {
                         </IconButton>
                         <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
                             News
+                            {isLoggedIn && <Button color='inherit' onClick={setLogout}>LogOut</Button>}
                         </Typography>
                         <Button color="inherit">Login</Button>
                     </Toolbar>
@@ -60,27 +61,13 @@ export const AppWithRedux = React.memo(() => {
                 {status === "loading" && <LinearProgress/>}
             </div>
             <Container fixed>
-                <Grid container style={{padding: "20px"}}>
-                    <AddTaskForm callback={addTodoList}/>
-                </Grid>
-                <Grid container spacing={3}>
-                    {todolists.map(el => {
-
-                        return (
-                            <Grid item key={el.id}>
-                                <Paper elevation={8} style={{padding: "10px"}}>
-                                    <div className="todolist">
-                                        <TodoListWithRedux
-                                            entityStatus={el.entityStatus}
-                                            todoListID={el.id}
-                                            todolistTitle={el.title}
-                                            todolistFilter={el.filter}
-                                        />
-                                    </div>
-                                </Paper>
-                            </Grid>
-                        )
-                    })}
+                <Grid container spacing={3} style={{marginTop: "20px"}}>
+                    <Routes>
+                        <Route path={'/'} element={<ToDoListContainer/>}/>
+                        <Route path={'/login'} element={<Login/>}/>
+                        <Route path={'/404'} element={<h1 style={{margin: '0 auto'}}>404 page not found</h1>}/>
+                        <Route path={'*'} element={<Navigate to={'/404'}/>}/>
+                    </Routes>
                 </Grid>
             </Container>
             <ErrorSnackbar/>
