@@ -9,8 +9,10 @@ import {ThunkType} from "../store/store";
 import {handlerServerNetworkError, handleServerAppError} from "../utils/error-utils";
 
 const initialState = {
+    //крутилка под верхним баннером
     status: 'idle' as RequestStatusType,
     error: null as string | null,
+    //крутилка всей страницы
     isInitialized: false
 }
 export const appReducer = (state: InitialStateType = initialState, action: AppActionsReducerType): InitialStateType => {
@@ -49,7 +51,7 @@ export const initializeAppTC = (): ThunkType => (dispatch) => {
     authAPI.me().then(res => {
             if (res.data.resultCode === 0) {
                 dispatch(setIsLoggedInAC(true));
-                dispatch(setAppStatusAC('succeeded'))
+                // dispatch(setAppStatusAC('succeeded'))
             } else {
                 handleServerAppError(dispatch, res.data)
             }

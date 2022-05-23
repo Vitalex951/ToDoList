@@ -1,5 +1,5 @@
 import {TaskType, todolistsAPI, UpdateTaskModelType} from "../../api/todos-api";
-import {addTodoListACType, removeTodoListACType, setTodosACType} from "./todolistReducer";
+import {addTodoListACType, clearTodoListDataACType, removeTodoListACType, setTodosACType} from "./todolistReducer";
 import {ThunkType} from "../store/store";
 import {setAppErrorsAC, setAppStatusAC} from "./app-reducer";
 import {handlerServerNetworkError} from "../utils/error-utils";
@@ -48,6 +48,8 @@ export const tasksReducer = (state: TaskObjetType = initialState, action: TaskRe
                 ...state,
                 [action.todolistID]: action.tasks
             }
+        case "CLEAR-DATA":
+            return {}
         default:
             return state
     }
@@ -198,6 +200,7 @@ export type TaskReducerType =
     | removeTodoListACType
     | setTodosACType
     | setTasksACType
+    | clearTodoListDataACType
 
 type removeTaskACType = ReturnType<typeof removeTaskAC>
 type addTaskACType = ReturnType<typeof addTaskAC>

@@ -7,6 +7,7 @@ import {ThunkType} from "../store/store";
 import {authAPI, LoginParamsType} from "../../api/todos-api";
 import {setAppStatusAC} from "./app-reducer";
 import {handlerServerNetworkError, handleServerAppError} from "../utils/error-utils";
+import {clearTodoListDataAC} from "./todolistReducer";
 
 const initialState = {
     isLoggedIn: false
@@ -41,9 +42,9 @@ export const loginTC = (data: LoginParamsType): ThunkType => (dispatch) => {
                     dispatch(setIsLoggedInAC(true))
                     dispatch(setAppStatusAC('succeeded'))
                 } else {
-                handleServerAppError(dispatch, res.data)
+                    handleServerAppError(dispatch, res.data)
                 }
-            dispatch(setAppStatusAC('succeeded'))
+                dispatch(setAppStatusAC('succeeded'))
             }
         )
         .catch(err => {
@@ -58,6 +59,7 @@ export const logOutTC = (): ThunkType => (dispatch) => {
                 if (res.data.resultCode === 0) {
                     dispatch(setIsLoggedInAC(false))
                     dispatch(setAppStatusAC('succeeded'))
+                    dispatch(clearTodoListDataAC())
                 } else {
                     handleServerAppError(dispatch, res.data)
                 }

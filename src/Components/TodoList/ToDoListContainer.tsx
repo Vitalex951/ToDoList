@@ -11,7 +11,9 @@ import {Navigate} from "react-router-dom";
 export const ToDoListContainer = () => {
     const todolists = useSelector<AppRootStateType, Array<TodolistDomainType>>(state => state.todoLists)
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
+
     const dispatch = useDispatch()
+
     useEffect(() => {
         if (isLoggedIn) {
             dispatch(fetchTodosTS())

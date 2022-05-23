@@ -19,6 +19,7 @@ export const AppWithRedux = React.memo(() => {
     const status = useSelector<AppRootStateType, RequestStatusType>(state => state.app.status)
     const isInitialized = useSelector<AppRootStateType, boolean>(state => state.app.isInitialized)
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
+
     useEffect(() => {
         dispatch(initializeAppTC())
     }, [])
@@ -33,7 +34,6 @@ export const AppWithRedux = React.memo(() => {
             <CircularProgress/>
         </div>
     }
-
 
     return (
         <div className='App'>
@@ -51,9 +51,9 @@ export const AppWithRedux = React.memo(() => {
                         </IconButton>
                         <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
                             News
-                            {isLoggedIn && <Button color='inherit' onClick={setLogout}>LogOut</Button>}
                         </Typography>
-                        <Button color="inherit">Login</Button>
+                        {isLoggedIn && <Button color='inherit' onClick={setLogout}>LogOut</Button>}
+                        {!isLoggedIn && <Button color="inherit">Login</Button>}
                     </Toolbar>
                 </AppBar>
             </Box>

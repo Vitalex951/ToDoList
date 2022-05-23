@@ -23,7 +23,8 @@ export const todoListReducer = (state: Array<TodolistDomainType> = initialState,
             return action.todos.map(el => ({...el, filter: 'all', entityStatus: "failed"}))
         case "TODOLIST/CHANGE_STATUS":
             return state.map(el => el.id === action.todoListID ? {...el, entityStatus: action.status} : el)
-
+        case "CLEAR-DATA":
+            return []
         default:
             return state
     }
@@ -62,6 +63,11 @@ export const changeTodoListEnityStatusAC = (todoListID: string, status: RequestS
         type: 'TODOLIST/CHANGE_STATUS', todoListID, status
     } as const
 }
+export const clearTodoListDataAC = () => {
+    return {
+        type: 'CLEAR-DATA'
+    } as const
+}
 
 //Thunks
 export const fetchTodosTS = (): ThunkType => async (dispatch) => {
@@ -95,20 +101,20 @@ export const removeTodoListTS = (todolistID: string): ThunkType => async (dispat
 }
 export const addTodoListTS = (title: string): ThunkType => async (dispatch) => {
     dispatch(setAppStatusAC("loading"))
-  todolistsAPI.createTodolist(title)
-      .then(res => {
-          if (res.data.resultCode === 1) {
-              handleServerAppError(dispatch, res.data)
-          } else {
-              const newTodolist = res.data.data.item
-              dispatch(addTodoListAC(newTodolist))
-              dispatch(setAppStatusAC("succeeded"))
-          }
-      })
-      .catch((err) => {
-          console.log(err)
-          handlerServerNetworkError(dispatch, err.message)
-      })
+    todolistsAPI.createTodolist(title)
+        .then(res => {
+            if (res.data.resultCode === 1) {
+                handleServerAppError(dispatch, res.data)
+            } else {
+                const newTodolist = res.data.data.item
+                dispatch(addTodoListAC(newTodolist))
+                dispatch(setAppStatusAC("succeeded"))
+            }
+        })
+        .catch((err) => {
+            console.log(err)
+            handlerServerNetworkError(dispatch, err.message)
+        })
 }
 export const updateTitleTodoListTS = (todolistID: string, title: string): ThunkType => async (dispatch) => {
     dispatch(setAppStatusAC("loading"))
@@ -118,8 +124,8 @@ export const updateTitleTodoListTS = (todolistID: string, title: string): ThunkT
             dispatch(setAppStatusAC("idle"))
         })
         .catch(err => {
-        handlerServerNetworkError(dispatch, err.message)
-    })
+            handlerServerNetworkError(dispatch, err.message)
+        })
 }
 
 
@@ -137,6 +143,7 @@ export type TodoListReducerType =
     | updateToDoListACType
     | setTodosACType
     | changeTodoListEnityStatusACType
+    | clearTodoListDataACType
 
 export type removeTodoListACType = ReturnType<typeof removeTodoListAC>
 type changeFilterACType = ReturnType<typeof changeFilterAC>
@@ -144,5 +151,6 @@ export type addTodoListACType = ReturnType<typeof addTodoListAC>
 type updateToDoListACType = ReturnType<typeof updateToDoListAC>
 export type setTodosACType = ReturnType<typeof setTodosAC>
 export type changeTodoListEnityStatusACType = ReturnType<typeof changeTodoListEnityStatusAC>
+export type clearTodoListDataACType = ReturnType<typeof clearTodoListDataAC>
 
 
