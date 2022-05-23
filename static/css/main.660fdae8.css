@@ -1,0 +1,50 @@
+body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;margin:0}code{font-family:source-code-pro,Menlo,Monaco,Consolas,Courier New,monospace}.todolist{display:flex;max-width:250px;min-height:300px;padding:10px}.error{border:1px solid red}.error-message{color:red;font-size:16px;max-width:200px;text-align:center}
+/*    !*padding: .8em 2em;*!*/
+
+/*!*.checkbox-other input[type=checkbox] {*!*/
+/*!*    position: absolute;*!*/
+/*!*    z-index: -1;*!*/
+/*!*    opacity: 0;*!*/
+/*!*    display: block;*!*/
+/*!*    width: 0;*!*/
+/*!*    height: 0;*!*/
+/*!*}*!*/
+
+/*!*.checkbox-other span {*!*/
+/*!*    display: inline-block;*!*/
+/*!*    position: relative;*!*/
+/*!*    padding: 0 0 0 35px;*!*/
+/*!*    line-height: 22px;*!*/
+/*!*}*!*/
+
+/*!*.checkbox-other span:before {*!*/
+/*!*    content: "";*!*/
+/*!*    display: inline-block;*!*/
+/*!*    width: 22px;*!*/
+/*!*    height: 22px;*!*/
+/*!*    position: absolute;*!*/
+/*!*    left: 0;*!*/
+/*!*    top: 0;*!*/
+/*!*    background: url(img/checkbox-3.png) 0 0 no-repeat;*!*/
+/*!*}*!*/
+
+
+/*!* Checked *!*/
+
+/*!* Focus *!*/
+
+/*!* Hover *!*/
+
+/*!* Active *!*/
+
+/*!* Disabled *!*/
+/*    !*display: flex;*!*/
+/*    !*justify-content: flex-end;*!*/
+
+
+/*!*.labelcontainer {*!*/
+/*!*    display: flex;*!*/
+/*!*    min-width: 100px;*!*/
+/*!*    border: 1px solid black;*!*/
+/*!*}*!*/.statusContainer{min-height:5px}.EditableSpan_input__4Mldg{border-radius:10px;width:120px}.EditableSpan_input__4Mldg:focus{box-shadow:0 0 10px rgba(37,59,255,.8)}button{margin:3px}
+/*# sourceMappingURL=main.660fdae8.css.map*/
