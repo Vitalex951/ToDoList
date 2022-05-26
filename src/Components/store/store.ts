@@ -21,5 +21,8 @@ export type AppActionsType = TaskReducerType | TodoListReducerType | AppActionsR
 
 export type ThunkType = ThunkAction<void, AppRootStateType, unknown, AppActionsType>
 
+
+
+
 // @ts-ignore
 window.store = store
