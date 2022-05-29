@@ -5,6 +5,7 @@ import {ReduxStoreProviderDecorator} from "./ReduxStoreProviderDecorator";
 import {useSelector} from "react-redux";
 import {AppRootStateType} from "../Components/store/store";
 import {TaskType} from "../api/todos-api";
+import {newTaskType} from "../Components/reducer/taskReducer";
 
 
 export default {
@@ -35,8 +36,8 @@ const Template: ComponentStory<typeof TaskUsingRedux> = () => <TaskUsingRedux/>;
 
 
 const TaskUsingRedux = () => {
-    const task1 = useSelector<AppRootStateType, TaskType>(state => state.tasks["todolistID1"][0])
-    const task2 = useSelector<AppRootStateType, TaskType>(state => state.tasks["todolistID2"][0])
+    const task1 = useSelector<AppRootStateType, newTaskType>(state => state.tasks["todolistID1"][0])
+    const task2 = useSelector<AppRootStateType, newTaskType>(state => state.tasks["todolistID2"][0])
     return (<>
             <TaskWithRedux
                 todoListID={'todolistID1'}

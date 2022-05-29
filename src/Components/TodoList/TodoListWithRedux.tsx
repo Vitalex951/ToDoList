@@ -9,7 +9,7 @@ import {AppRootStateType} from "../store/store";
 import {changeFilterAC, removeTodoListTS, updateTitleTodoListTS} from "../reducer/todolistReducer";
 import {TaskListWithRedux} from "../TaskList/TaskListWithRedux";
 import {AddTaskFormWithRedux} from "../AddForm/AddFormWithReducer";
-import {addTaskTC, fetchTasksTC} from "../reducer/taskReducer";
+import {addTaskTC, fetchTasksTC, newTaskType} from "../reducer/taskReducer";
 import {TaskStatuses, TaskType} from "../../api/todos-api";
 import {RequestStatusType} from "../reducer/app-reducer";
 
@@ -22,7 +22,7 @@ type TodoListPropsType = {
 
 export const TodoListWithRedux = React.memo((props: TodoListPropsType) => {
 
-    const task = useSelector<AppRootStateType, Array<TaskType>>(state => state.tasks[props.todoListID])
+    const task = useSelector<AppRootStateType, Array<newTaskType>>(state => state.tasks[props.todoListID])
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -40,7 +40,7 @@ export const TodoListWithRedux = React.memo((props: TodoListPropsType) => {
         dispatch(removeTodoListTS(props.todoListID))
     }, [props.todoListID])
     const changeFilter = useCallback((todoListID: string, filter: FilterValuesType) => {
-        dispatch(changeFilterAC(todoListID, filter))
+        dispatch(changeFilterAC({todoListID, filter}))
     }, [])
 
 

@@ -4,14 +4,14 @@ import {AppRootStateType} from "../Components/store/store";
 import {Story} from "@storybook/react";
 import {combineReducers, createStore} from "redux";
 import {tasksReducer} from "../Components/reducer/taskReducer";
-import {todoListReducer} from "../Components/reducer/todolistReducer";
 import {TaskPriorities, TaskStatuses} from "../api/todos-api";
 import {appReducer} from "../Components/reducer/app-reducer";
+import {todolistReducer} from "../Components/reducer/todolistReducer";
 
 
 const rootReducer = combineReducers({
     tasks: tasksReducer,
-    todoLists: todoListReducer,
+    todoLists: todolistReducer,
     app: appReducer
 })
 
@@ -28,7 +28,8 @@ const initialGlobalState: AppRootStateType = {
                 deadline: '',
                 addedDate: '',
                 order: 0,
-                priority: TaskPriorities.Low
+                priority: TaskPriorities.Low,
+                entityStatus: "succeeded"
             },
             {
                 id: '2',
@@ -40,7 +41,8 @@ const initialGlobalState: AppRootStateType = {
                 deadline: '',
                 addedDate: '',
                 order: 0,
-                priority: TaskPriorities.Low
+                priority: TaskPriorities.Low,
+                entityStatus: "succeeded"
             },
             {
                 id: '3',
@@ -52,7 +54,8 @@ const initialGlobalState: AppRootStateType = {
                 deadline: '',
                 addedDate: '',
                 order: 0,
-                priority: TaskPriorities.Low
+                priority: TaskPriorities.Low,
+                entityStatus: "succeeded"
             },
             {
                 id: '4',
@@ -64,7 +67,8 @@ const initialGlobalState: AppRootStateType = {
                 deadline: '',
                 addedDate: '',
                 order: 0,
-                priority: TaskPriorities.Low
+                priority: TaskPriorities.Low,
+                entityStatus: "succeeded"
             },
             {
                 id: '5',
@@ -76,7 +80,8 @@ const initialGlobalState: AppRootStateType = {
                 deadline: '',
                 addedDate: '',
                 order: 0,
-                priority: TaskPriorities.Low
+                priority: TaskPriorities.Low,
+                entityStatus: "succeeded"
             },
         ],
         ["todolistID2"]: [
@@ -90,7 +95,8 @@ const initialGlobalState: AppRootStateType = {
                 deadline: '',
                 addedDate: '',
                 order: 0,
-                priority: TaskPriorities.Low
+                priority: TaskPriorities.Low,
+                entityStatus: "succeeded"
             },
             {
                 id: '2',
@@ -102,7 +108,8 @@ const initialGlobalState: AppRootStateType = {
                 deadline: '',
                 addedDate: '',
                 order: 0,
-                priority: TaskPriorities.Low
+                priority: TaskPriorities.Low,
+                entityStatus: "succeeded"
             },
             {
                 id: '3',
@@ -114,7 +121,8 @@ const initialGlobalState: AppRootStateType = {
                 deadline: '',
                 addedDate: '',
                 order: 0,
-                priority: TaskPriorities.Low
+                priority: TaskPriorities.Low,
+                entityStatus: "succeeded"
             },
             {
                 id: '4',
@@ -126,7 +134,8 @@ const initialGlobalState: AppRootStateType = {
                 deadline: '',
                 addedDate: '',
                 order: 0,
-                priority: TaskPriorities.Low
+                priority: TaskPriorities.Low,
+                entityStatus: "succeeded"
             },
             {
                 id: '5',
@@ -138,7 +147,8 @@ const initialGlobalState: AppRootStateType = {
                 deadline: '',
                 addedDate: '',
                 order: 0,
-                priority: TaskPriorities.Low
+                priority: TaskPriorities.Low,
+                entityStatus: "succeeded"
             },
         ]
     },

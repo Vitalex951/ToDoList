@@ -1,12 +1,11 @@
 import React, {useEffect} from 'react';
 import {TaskWithRedux} from "../Task/TaskWithRedux";
 import {useDispatch} from "react-redux";
-import {setTasksAC} from "../reducer/taskReducer";
-import {TaskType} from "../../api/todos-api";
+import {newTaskType, setTasksAC} from "../reducer/taskReducer";
 
 
 type TaskListPropsType = {
-    tasks: Array<TaskType>
+    tasks: Array<newTaskType>
     todoListID: string
 }
 
@@ -14,7 +13,7 @@ export const TaskListWithRedux = React.memo(({tasks, todoListID}: TaskListPropsT
     const dispatch = useDispatch()
     useEffect(() => {
 
-        dispatch(setTasksAC(todoListID, tasks))
+        dispatch(setTasksAC({todolistID: todoListID, tasks}))
     }, [])
     const tasksComponentsList = tasks?.map(task => {
             return <TaskWithRedux

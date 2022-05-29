@@ -3,7 +3,7 @@ import {EditableSpan} from "../EditableSpan/EditableSpan";
 import {Checkbox, IconButton} from "@material-ui/core";
 import {Delete} from "@material-ui/icons";
 import {useDispatch} from "react-redux";
-import {removeTaskTC, updateTaskStatusTC, updateTaskTitleTC} from "../reducer/taskReducer";
+import {newTaskType, removeTaskTC, updateTaskStatusTC, updateTaskTitleTC} from "../reducer/taskReducer";
 import {TaskStatuses, TaskType} from "../../api/todos-api";
 
 
@@ -11,7 +11,7 @@ export type TaskPropsType = TaskType & {
     id: string
     title: string
     todoListID: string
-    task: TaskType
+    task: newTaskType
 }
 
 
@@ -32,7 +32,6 @@ export const TaskWithRedux = React.memo((props: TaskPropsType) => {
     const removeTask = useCallback(() => {
         dispatch(removeTaskTC(props.todoListID, props.id))
     }, [props.todoListID, props.id])
-
     return (
         <div className='task'>
             <li>
@@ -43,7 +42,7 @@ export const TaskWithRedux = React.memo((props: TaskPropsType) => {
                             oldTitle={props.task.title}
                             callback={updateTitleTask}/>
 
-                        <IconButton onClick={removeTask} size={"small"}>
+                        <IconButton onClick={removeTask} size={"small"} disabled={props.task.entityStatus === 'loading'}>
                             <Delete/>
                         </IconButton>
 

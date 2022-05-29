@@ -11,8 +11,7 @@ import {addTaskAC, removeTaskAC, tasksReducer, updateTaskAC} from "../Components
 import {
     addTodoListAC,
     changeFilterAC,
-    removeTodoListAC,
-    todoListReducer,
+    removeTodoListAC, todolistReducer,
     updateToDoListAC
 } from "../Components/reducer/todolistReducer";
 import {AddTaskForm} from "../Components/trash/AddTaskForm";
@@ -23,7 +22,7 @@ export type FilterValuesType = 'all' | 'active' | 'completed'
 
 function App() {
 
-    let [todolists, todolistsDispatch] = useReducer(todoListReducer, [
+    let [todolists, todolistsDispatch] = useReducer(todolistReducer, [
         {id: "todolistID1", title: 'What to learn', addedDate: '', order: 3, filter: 'all', entityStatus: "succeeded"},
         {id: "todolistID2", title: 'What to buy', addedDate: '', order: 3, filter: 'all', entityStatus: "succeeded"},
     ])
@@ -40,7 +39,8 @@ function App() {
                 deadline: '',
                 addedDate: '',
                 order: 0,
-                priority: TaskPriorities.Low
+                priority: TaskPriorities.Low,
+                entityStatus: "succeeded"
             },
             {
                 id: '2',
@@ -52,7 +52,8 @@ function App() {
                 deadline: '',
                 addedDate: '',
                 order: 0,
-                priority: TaskPriorities.Low
+                priority: TaskPriorities.Low,
+                entityStatus: "succeeded"
             },
             {
                 id: '3',
@@ -64,7 +65,8 @@ function App() {
                 deadline: '',
                 addedDate: '',
                 order: 0,
-                priority: TaskPriorities.Low
+                priority: TaskPriorities.Low,
+                entityStatus: "succeeded"
             },
             {
                 id: '4',
@@ -76,7 +78,8 @@ function App() {
                 deadline: '',
                 addedDate: '',
                 order: 0,
-                priority: TaskPriorities.Low
+                priority: TaskPriorities.Low,
+                entityStatus: "succeeded"
             },
             {
                 id: '5',
@@ -88,7 +91,8 @@ function App() {
                 deadline: '',
                 addedDate: '',
                 order: 0,
-                priority: TaskPriorities.Low
+                priority: TaskPriorities.Low,
+                entityStatus: "succeeded"
             },
         ],
         ["todolistID2"]: [
@@ -102,7 +106,8 @@ function App() {
                 deadline: '',
                 addedDate: '',
                 order: 0,
-                priority: TaskPriorities.Low
+                priority: TaskPriorities.Low,
+                entityStatus: "succeeded"
             },
             {
                 id: '2',
@@ -114,7 +119,8 @@ function App() {
                 deadline: '',
                 addedDate: '',
                 order: 0,
-                priority: TaskPriorities.Low
+                priority: TaskPriorities.Low,
+                entityStatus: "succeeded"
             },
             {
                 id: '3',
@@ -126,7 +132,8 @@ function App() {
                 deadline: '',
                 addedDate: '',
                 order: 0,
-                priority: TaskPriorities.Low
+                priority: TaskPriorities.Low,
+                entityStatus: "succeeded"
             },
             {
                 id: '4',
@@ -138,7 +145,8 @@ function App() {
                 deadline: '',
                 addedDate: '',
                 order: 0,
-                priority: TaskPriorities.Low
+                priority: TaskPriorities.Low,
+                entityStatus: "succeeded"
             },
             {
                 id: '5',
@@ -150,7 +158,8 @@ function App() {
                 deadline: '',
                 addedDate: '',
                 order: 0,
-                priority: TaskPriorities.Low
+                priority: TaskPriorities.Low,
+                entityStatus: "succeeded"
             },
         ]
     })
@@ -179,71 +188,82 @@ function App() {
 
     //TodoList
     function removeToDoList(todoListID: string) {
-        todolistsDispatch(removeTodoListAC(todoListID))
-        tasksDispatch(removeTodoListAC(todoListID))
+        todolistsDispatch(removeTodoListAC({todoListID}))
+        tasksDispatch(removeTodoListAC({todoListID}))
     }
 
     const updateToDoList = (todoListID: string, title: string) => {
-        todolistsDispatch(updateToDoListAC(todoListID, title))
+        todolistsDispatch(updateToDoListAC({todoListID, title}))
     }
     const addTodoList = (title: string) => {
-        let newTodolist = addTodoListAC({id: "todolistID1", title, addedDate: '', order: 3})
+        let newTodolist = addTodoListAC({
+            todoList: {id: "todolistID1", title, addedDate: '', order: 3}
+        })
         todolistsDispatch(newTodolist)
         tasksDispatch(newTodolist)
     }
 
     function changeFilter(todoListID: string, filter: FilterValuesType) {
-        todolistsDispatch(changeFilterAC(todoListID, filter))
+        todolistsDispatch(changeFilterAC({todoListID, filter}))
     }
 
 
     //tasks
     const changeStatus = (todoListID: string, taskID: string, status: TaskStatuses) => {
         tasksDispatch(updateTaskAC({
-            id: '1',
-            title: "HTML&CSS",
-            status,
-            todoListId: 'todoListId1',
-            description: '',
-            startDate: '',
-            deadline: '',
-            addedDate: '',
-            order: 0,
-            priority: TaskPriorities.Low
-        },))
+            task: {
+                id: '1',
+                title: "HTML&CSS",
+                status,
+                todoListId: 'todoListId1',
+                description: '',
+                startDate: '',
+                deadline: '',
+                addedDate: '',
+                order: 0,
+                priority: TaskPriorities.Low,
+                entityStatus: "succeeded"
+            }
+        }))
     }
     const addTask = (todoListID: string, title: string) => {
         tasksDispatch(addTaskAC({
-            id: '1',
-            title,
-            status: TaskStatuses.New,
-            todoListId: todoListID,
-            description: '',
-            startDate: '',
-            deadline: '',
-            addedDate: '',
-            order: 0,
-            priority: TaskPriorities.Low
+            newTask: {
+                id: '1',
+                title,
+                status: TaskStatuses.New,
+                todoListId: todoListID,
+                description: '',
+                startDate: '',
+                deadline: '',
+                addedDate: '',
+                order: 0,
+                priority: TaskPriorities.Low,
+                entityStatus: "succeeded"
+            }
         }))
     }
 
     const updateTitleTask = (todolistID: string, taskID: string, title: string) => {
         tasksDispatch(updateTaskAC({
-            id: taskID,
-            title,
-            status: TaskStatuses.New,
-            todoListId: todolistID,
-            description: '',
-            startDate: '',
-            deadline: '',
-            addedDate: '',
-            order: 0,
-            priority: TaskPriorities.Low
+            task: {
+                id: taskID,
+                title,
+                status: TaskStatuses.New,
+                todoListId: todolistID,
+                description: '',
+                startDate: '',
+                deadline: '',
+                addedDate: '',
+                order: 0,
+                priority: TaskPriorities.Low,
+                entityStatus: "succeeded"
+            }
         }))
     }
 
     function removeTask(todoListID: string, id: string) {
-        tasksDispatch(removeTaskAC(todoListID, id))
+        tasksDispatch(removeTaskAC({todoListID, id}))
     }
 
     return (
