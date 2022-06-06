@@ -1,4 +1,4 @@
-import {TaskObjetType} from "../taskReducer";
+import {addTaskAC, removeTaskAC, TaskObjetType, tasksReducer, updateTaskAC} from "../taskReducer";
 import {TaskPriorities, TaskStatuses} from "../../../api/todos-api";
 
 
@@ -142,34 +142,34 @@ beforeEach(() => {
     }
 })
 
-// test('should be REMOVE-TASK', () => {
-//     const endState = tasksReducer(startState, removeTaskAC("todolistID1",'1'))
-//     expect(endState["todolistID1"].length).toBe(4);
-//     expect(endState["todolistID2"].length).toBe(5);
-// });
-// test('should be CHANGE-STATUS', () => {
-//    let task = {...startState["todolistID1"][1], status: TaskStatuses.Completed}
-//     const endState = tasksReducer(startState, updateTaskAC(task))
-//
-//     expect(endState["todolistID1"][0].status).toBe(TaskStatuses.New);
-//     expect(endState["todolistID1"][1].status).toBe(TaskStatuses.Completed);
-//     expect(endState["todolistID1"].length).toBe(5);
-//     expect(endState["todolistID2"].length).toBe(5);
-// });
-// test('should be addTask', () => {
-//     let task = {...startState["todolistID2"][0], title: 'React_2.0'}
-//     const endState = tasksReducer(startState, addTaskAC(task))
-//
-//     expect(endState["todolistID2"][0].title).toBe('React_2.0');
-//     expect(endState["todolistID2"].length).toBe(6);
-//     expect(endState["todolistID1"].length).toBe(5);
-// });
-// test('should be addEmptyTask', () => {
-//     let task = {...startState["todolistID2"][2], title: 'React_2.0'}
-//     const endState = tasksReducer(startState, updateTaskAC(task))
-//
-//     expect(endState["todolistID2"][2].title).toBe('React_2.0');
-//     expect(endState["todolistID2"][0].title).toBe('HTML&CSS2');
-//     expect(endState["todolistID2"].length).toBe(5);
-//     expect(endState["todolistID1"].length).toBe(5);
-// });
+test('should be REMOVE-TASK', () => {
+    const endState = tasksReducer(startState, removeTaskAC({id: '1', todoListID: "todolistID1"},))
+    expect(endState["todolistID1"].length).toBe(4);
+    expect(endState["todolistID2"].length).toBe(5);
+});
+test('should be CHANGE-STATUS', () => {
+   let task = {...startState["todolistID1"][1], status: TaskStatuses.Completed}
+    const endState = tasksReducer(startState, updateTaskAC({task}))
+
+    expect(endState["todolistID1"][0].status).toBe(TaskStatuses.New);
+    expect(endState["todolistID1"][1].status).toBe(TaskStatuses.Completed);
+    expect(endState["todolistID1"].length).toBe(5);
+    expect(endState["todolistID2"].length).toBe(5);
+});
+test('should be addTask', () => {
+    let newTask = {...startState["todolistID2"][0], title: 'React_2.0'}
+    const endState = tasksReducer(startState, addTaskAC({newTask}))
+
+    expect(endState["todolistID2"][0].title).toBe('React_2.0');
+    expect(endState["todolistID2"].length).toBe(6);
+    expect(endState["todolistID1"].length).toBe(5);
+});
+test('should be addEmptyTask', () => {
+    let task = {...startState["todolistID2"][2], title: 'React_2.0'}
+    const endState = tasksReducer(startState, updateTaskAC({task}))
+
+    expect(endState["todolistID2"][2].title).toBe('React_2.0');
+    expect(endState["todolistID2"][0].title).toBe('HTML&CSS2');
+    expect(endState["todolistID2"].length).toBe(5);
+    expect(endState["todolistID1"].length).toBe(5);
+});
