@@ -13,7 +13,7 @@ export const AddTaskForm = React.memo((props: AddTaskFormPropsType) => {
     const onChangeHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         setTitle(e.currentTarget.value)
         setError('')
-    }, [])
+    }, [title])
 
     const onClickAddTask = useCallback(() => {
         if (title.trim()) {
@@ -30,7 +30,7 @@ export const AddTaskForm = React.memo((props: AddTaskFormPropsType) => {
         if (e.charCode === 13) {
             onClickAddTask()
         }
-    }, [])
+    }, [title])
 
 
     // let classError = (error ? 'input-add error' : 'input-add')

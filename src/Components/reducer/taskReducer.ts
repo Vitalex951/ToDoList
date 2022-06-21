@@ -202,6 +202,9 @@ export const fetchTasksTC = (todolistID: string) => async (dispatch: Dispatch) =
             dispatch(setTasksAC({tasks: res.data.items, todolistID: todolistID}))
             dispatch(setAppStatusAC({status: "succeeded"}))
         })
+        .catch(err => {
+            handlerServerNetworkError(dispatch, err.message)
+        })
 }
 export const removeTaskTC = (todoListID: string, id: string) => async (dispatch: Dispatch) => {
     dispatch(setAppStatusAC({status: 'loading'}))

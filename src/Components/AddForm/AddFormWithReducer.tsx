@@ -14,7 +14,8 @@ export const AddTaskFormWithRedux = React.memo((props: AddTaskFormPropsType) => 
     const onChangeHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         setTitle(e.currentTarget.value)
         setError('')
-    }, [])
+    }, [title])
+
     const onClickAddTask = useCallback(() => {
         if (title.trim()) {
             props.callback(title.trim())
@@ -29,7 +30,8 @@ export const AddTaskFormWithRedux = React.memo((props: AddTaskFormPropsType) => 
         if (e.charCode === 13) {
             onClickAddTask()
         }
-    }, [])
+    }, [title])
+
     return (
         <div>
             <TextField value={title}
