@@ -37,26 +37,26 @@ export const AppWithRedux = React.memo(() => {
 
     return (
         <div className='App'>
-            {/*<Box sx={{flexGrow: 1}}>*/}
-            {/*    <AppBar position="static">*/}
-            {/*        <Toolbar>*/}
-            {/*            <IconButton*/}
-            {/*                size="large"*/}
-            {/*                edge="start"*/}
-            {/*                color="inherit"*/}
-            {/*                aria-label="menu"*/}
-            {/*                sx={{mr: 2}}*/}
-            {/*            >*/}
-            {/*                <Menu/>*/}
-            {/*            </IconButton>*/}
-            {/*            <Typography variant="h6" component="div" sx={{flexGrow: 1}}>*/}
-            {/*                News*/}
-            {/*            </Typography>*/}
-            {/*            {isLoggedIn && <Button color='inherit' onClick={setLogout}>LogOut</Button>}*/}
-            {/*            {!isLoggedIn && <Button color="inherit">Login</Button>}*/}
-            {/*        </Toolbar>*/}
-            {/*    </AppBar>*/}
-            {/*</Box>*/}
+            <Box sx={{flexGrow: 1}}>
+                <AppBar position="static">
+                    <Toolbar>
+                        <IconButton
+                            size="large"
+                            edge="start"
+                            color="inherit"
+                            aria-label="menu"
+                            sx={{mr: 2}}
+                        >
+                            <Menu/>
+                        </IconButton>
+                        <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
+                            News
+                        </Typography>
+                        {isLoggedIn && <Button color='inherit' onClick={setLogout}>LogOut</Button>}
+                        {!isLoggedIn && <Button color="inherit">Login</Button>}
+                    </Toolbar>
+                </AppBar>
+            </Box>
             <div className='statusContainer'>
                 {status === "loading" && <LinearProgress/>}
             </div>
